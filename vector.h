@@ -29,7 +29,13 @@ public:
 
     Vec operator>>(double angle);
 
-    Vec& operator=(Vec v);
-}Point;
+    Vec &operator=(Vec v);
+
+    Vec &operator+=(Vec v);
+
+    Vec &operator-=(Vec v);
+
+    Vec operator-();
+} Point;
 
 #endif //PROJECT3_VECTOR_H

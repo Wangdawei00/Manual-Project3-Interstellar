@@ -54,3 +54,18 @@ Vec &Vec::operator=(Vec v) {
     this->y = v.getY();
     return *this;
 }
+
+Vec &Vec::operator+=(Vec v) {
+    this->x += v.getX();
+    this->y += v.getY();
+    return *this;
+}
+
+Vec Vec::operator-() {
+    return Vec(-x, -y);
+}
+
+Vec &Vec::operator-=(Vec v) {
+    (*this) += (-v);
+    return (*this);
+}

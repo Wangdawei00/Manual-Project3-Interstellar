@@ -70,26 +70,65 @@ Parellelogram::Parellelogram(double r, double g, double b, Point center, double 
     this->angle2 = angle2;
     this->halfDiagonal1 = halfDiagonal1;
     this->halfDiagonal2 = halfDiagonal2;
-}
-
-void Parellelogram::draw() {
     point1 = {center.getX() + halfDiagonal1 * cos(angle1), center.getY() + halfDiagonal1 * sin(angle1)};
     point2 = {center.getX() - halfDiagonal2 * cos(angle2), center.getY() + halfDiagonal2 * sin(angle2)};
     point3 = {center.getX() - halfDiagonal1 * cos(angle1), center.getY() - halfDiagonal1 * sin(angle1)};
     point4 = {center.getX() + halfDiagonal2 * cos(angle2), center.getY() - halfDiagonal2 * sin(angle2)};
-    Quadrilateral::draw();
 }
+
 
 Rect::Rect(double r, double g, double b, Point center, Point vertex, double angle) : Parellelogram(r, g, b) {
     this->center = center;
     this->vertex = vertex;
     diagonalAngle = angle;
-}
-
-void Rect::draw() {
     point1 = vertex;
     point2 = (vertex - center << diagonalAngle) + center;
     point3 = center * 2 - point1;
     point4 = center * 2 - point2;
-    Quadrilateral::draw();
+}
+
+
+void Quadrilateral::move(Vec v) {
+    point1 += v;
+    point2 += v;
+    point4 += v;
+    point3 += v;
+}
+
+
+void Circle::move(Vec v) {
+    center += v;
+}
+
+void Parellelogram::move(Vec v) {
+    Quadrilateral::move(v);
+    center += v;
+}
+
+void Triangle::move(Vec v) {
+    point3 += v;
+    point1 += v;
+    point2 += v;
+}
+
+void Circle::rotate(Point center, double angle) {
+    this->center = (this->center - center << angle) + center;
+}
+
+void Quadrilateral::rotate(Point center, double angle) {
+    point1 = (point1 - center << angle) + center;
+    point2 = (point1 - center << angle) + center;
+    point3 = (point1 - center << angle) + center;
+    point4 = (point1 - center << angle) + center;
+}
+
+void Parellelogram::rotate(Point center, double angle) {
+    Quadrilateral::rotate(center, angle);
+    this->center = (this->center - center << angle) + center;
+}
+
+void Triangle::rotate(Point center, double angle) {
+    point1 = (point1 - center << angle) + center;
+    point2 = (point1 - center << angle) + center;
+    point3 = (point1 - center << angle) + center;
 }
