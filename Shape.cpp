@@ -70,10 +70,10 @@ Parellelogram::Parellelogram(double r, double g, double b, Point center, double 
     this->angle2 = angle2;
     this->halfDiagonal1 = halfDiagonal1;
     this->halfDiagonal2 = halfDiagonal2;
-    point1 = {center.getX() + halfDiagonal1 * cos(angle1), center.getY() + halfDiagonal1 * sin(angle1)};
-    point2 = {center.getX() - halfDiagonal2 * cos(angle2), center.getY() + halfDiagonal2 * sin(angle2)};
-    point3 = {center.getX() - halfDiagonal1 * cos(angle1), center.getY() - halfDiagonal1 * sin(angle1)};
-    point4 = {center.getX() + halfDiagonal2 * cos(angle2), center.getY() - halfDiagonal2 * sin(angle2)};
+    point1 = Vec(center.getX() + halfDiagonal1 * cos(angle1), center.getY() + halfDiagonal1 * sin(angle1));
+    point2 = Vec(center.getX() - halfDiagonal2 * cos(angle2), center.getY() + halfDiagonal2 * sin(angle2));
+    point3 = Vec(center.getX() - halfDiagonal1 * cos(angle1), center.getY() - halfDiagonal1 * sin(angle1));
+    point4 = Vec(center.getX() + halfDiagonal2 * cos(angle2), center.getY() - halfDiagonal2 * sin(angle2));
 }
 
 
