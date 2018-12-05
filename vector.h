@@ -9,9 +9,7 @@ typedef class Vec {
 private:
     double x, y;
 public:
-    Vec();
-
-    Vec(double x, double y);
+    explicit Vec(double x=0, double y=0);
 
     double getX();
 

@@ -5,11 +5,6 @@
 #include <cmath>
 #include "vector.h"
 
-Vec::Vec() {
-    x = 0;
-    y = 0;
-}
-
 double Vec::getX() {
     return this->x;
 }
