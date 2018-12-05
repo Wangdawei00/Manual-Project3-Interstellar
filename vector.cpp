@@ -48,9 +48,9 @@ Vec Vec::operator>>(double angle) {
     return (*this) << (-angle);
 }
 
-Vec& Vec::operator=(Vec v) {
+Vec &Vec::operator=(Vec v) {
 //    Vec ret(v.getX(),v.getY());
-    this->x=v.getX();
-    this->y=v.getY();
+    this->x = v.getX();
+    this->y = v.getY();
     return *this;
 }
