@@ -5,7 +5,7 @@
 #ifndef PROJECT3_VECTOR_H
 #define PROJECT3_VECTOR_H
 static const double PI = 3.1415926535897932384626;
-class Vec {
+typedef class Vec {
 private:
     double x, y;
 public:
@@ -30,6 +30,6 @@ public:
     Vec operator>>(double angle);
 
     Vec& operator=(Vec v);
-};
+}Point;
 
 #endif //PROJECT3_VECTOR_H

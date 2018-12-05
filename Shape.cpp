@@ -1,0 +1,95 @@
+//
+// Created by Wangdawei on 2018/12/5.
+//
+
+#include "Shape.h"
+
+//#include "shapes.h"
+#include <GL/freeglut.h>
+#include <cmath>
+
+
+Shape::Shape(double r, double g, double b) {
+    this->b = b;
+    this->r = r;
+    this->g = g;
+}
+
+Quadrilateral::Quadrilateral(double r, double g, double b, Point p1, Point p2, Point p3, Point p4) : Shape(r, g, b) {
+    point1 = p1;
+    point2 = p2;
+    point3 = p3;
+    point4 = p4;
+}
+
+Triangle::Triangle(Point p1, Point p2, Point p3, double r, double g, double b) : Shape(r, g, b) {
+    point1 = p1;
+    point2 = p2;
+    point3 = p3;
+}
+
+Circle::Circle(Point p1, double radius, double r, double g, double b) : Shape(r, g, b) {
+    this->radius = radius;
+    center = p1;
+}
+
+void Triangle::draw() {
+    glColor3d(r, g, b);
+    glBegin(GL_TRIANGLE_STRIP);
+    glVertex2d(point1.getX(), point1.getY());
+    glVertex2d(point2.getX(), point2.getY());
+    glVertex2d(point3.getX(), point3.getY());
+    glEnd();
+}
+
+void Quadrilateral::draw() {
+    glColor3d(r, g, b);
+    glBegin(GL_QUADS);
+    glVertex2d(point1.getX(), point1.getY());
+    glVertex2d(point2.getX(), point2.getY());
+    glVertex2d(point3.getX(), point3.getY());
+    glVertex2d(point4.getX(), point4.getY());
+    glEnd();
+}
+
+void Circle::draw() {
+    int iter = 2000;
+    glColor3d(r, g, b);
+    glBegin(GL_POLYGON);
+    for (int i = 0; i < iter; ++i) {
+        glVertex2d(radius * cos(2 * pi / iter * i) + center.getX(), radius * sin(2 * pi / iter * i) + center.getY());
+    }
+    glEnd();
+    glFlush();
+}
+
+Parellelogram::Parellelogram(double r, double g, double b, Point center, double angle1, double halfDiagonal1,
+                             double angle2, double halfDiagonal2) : Quadrilateral(r, g, b) {
+    this->center = center;
+    this->angle1 = angle1;
+    this->angle2 = angle2;
+    this->halfDiagonal1 = halfDiagonal1;
+    this->halfDiagonal2 = halfDiagonal2;
+}
+
+void Parellelogram::draw() {
+    point1 = {center.getX() + halfDiagonal1 * cos(angle1), center.getY() + halfDiagonal1 * sin(angle1)};
+    point2 = {center.getX() - halfDiagonal2 * cos(angle2), center.getY() + halfDiagonal2 * sin(angle2)};
+    point3 = {center.getX() - halfDiagonal1 * cos(angle1), center.getY() - halfDiagonal1 * sin(angle1)};
+    point4 = {center.getX() + halfDiagonal2 * cos(angle2), center.getY() - halfDiagonal2 * sin(angle2)};
+    Quadrilateral::draw();
+}
+
+Rect::Rect(double r, double g, double b, Point center, Point vertex, double angle) : Parellelogram(r, g, b) {
+    this->center = center;
+    this->vertex = vertex;
+    diagonalAngle = angle;
+}
+
+void Rect::draw() {
+    point1 = vertex;
+    point2 = (vertex - center << diagonalAngle) + center;
+    point3 = center * 2 - point1;
+    point4 = center * 2 - point2;
+    Quadrilateral::draw();
+}
