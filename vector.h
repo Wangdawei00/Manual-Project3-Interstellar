@@ -9,7 +9,7 @@ typedef class Vec {
 private:
     double x, y;
 public:
-    explicit Vec(double x=0, double y=0);
+    explicit Vec(double x = 0, double y = 0);
 
     double getX();
 
@@ -35,5 +35,7 @@ public:
 
     Vec operator-();
 } Point;
+
+Vec operator*(double k, Vec v);
 
 #endif //PROJECT3_VECTOR_H

@@ -64,3 +64,7 @@ Vec &Vec::operator-=(Vec v) {
     (*this) += (-v);
     return (*this);
 }
+
+Vec operator*(double k, Vec v) {
+    return v * k;
+}
