@@ -4,9 +4,11 @@
 
 #ifndef MANUAL_PROJECT3_INTERSTELLAR_FIGURE_H
 #define MANUAL_PROJECT3_INTERSTELLAR_FIGURE_H
-class Figure{
+
+class Figure {
 public:
-    virtual void draw()=0;
+    virtual void draw() = 0;
+
     virtual ~Figure();
 };
 
