@@ -4,7 +4,6 @@
 
 #include "Shape.h"
 
-//#include "shapes.h"
 #include <GL/freeglut.h>
 #include <cmath>
 
