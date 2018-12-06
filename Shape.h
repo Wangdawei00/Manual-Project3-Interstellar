@@ -128,6 +128,8 @@ public:
 
     void rotate(Point center, double angle) override;
 
+    void move(Vec v) override;
+
     void draw() override;
 
 private:

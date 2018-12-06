@@ -167,5 +167,24 @@ void Circle::move(Vec v) {
 SemiCircle::SemiCircle(double r, double g, double b, Point center, double angle) : Shape(r, g, b) {
     this->center = center;
     rotationAngle = angle;
+}
 
+void SemiCircle::rotate(Point center, double angle) {
+    this->center = (this->center - center << angle) + center;
+    rotationAngle += angle;
+}
+
+void SemiCircle::move(Vec v) {
+    center += v;
+}
+
+void SemiCircle::draw() {
+    glColor3d(color.getR(), color.getG(), color.getB());
+    glBegin(GL_POLYGON);
+    int iter = 2000;
+    for (int i = 0; i < iter; ++i) {
+        glVertex2d(radius * cos(2 * pi / iter * i) + center.getX(), radius * sin(2 * pi / iter * i) + center.getY())
+    }
+    glEnd();
+    glFlush();
 }
