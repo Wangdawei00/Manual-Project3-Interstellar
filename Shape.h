@@ -78,8 +78,7 @@ public:
     void rotate(Point center, double angle) override;
 
     explicit Triangle(Point p1 = Vec(0, 0), Point p2 = Vec(1, 0), Point p3 = Vec(0.5, 0.866), double r = 0,
-                      double g = 0,
-                      double b = 0);
+                      double g = 0, double b = 0);
 
 private:
     Point point1, point2, point3;
