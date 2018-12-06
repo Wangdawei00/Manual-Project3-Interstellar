@@ -183,7 +183,8 @@ void SemiCircle::draw() {
     glBegin(GL_POLYGON);
     int iter = 2000;
     for (int i = 0; i < iter; ++i) {
-        glVertex2d(radius * cos(2 * pi / iter * i) + center.getX(), radius * sin(2 * pi / iter * i) + center.getY())
+        glVertex2d(radius * cos(2 * pi / iter * i + rotationAngle) + center.getX(),
+                   radius * sin(2 * pi / iter * i + rotationAngle) + center.getY());
     }
     glEnd();
     glFlush();
