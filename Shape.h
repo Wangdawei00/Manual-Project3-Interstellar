@@ -9,6 +9,22 @@ static const double pi = 3.1415926535897932;
 #include "Figure.h"
 #include "vector.h"
 
+class Color {
+public:
+    void set(double r, double g, double b);
+
+    explicit Color(double r = 0, double g = 0, double b = 0);
+
+    double getR();
+
+    double getB();
+
+    double getG();
+
+private:
+    double r, g, b;
+};
+
 class Shape : public Figure {
     void draw() override = 0;
 
@@ -19,7 +35,7 @@ class Shape : public Figure {
 protected:
     explicit Shape(double r = 0, double g = 0, double b = 0);
 
-    double r, g, b;
+    Color color;
 };
 
 class Quadrilateral : public Shape {

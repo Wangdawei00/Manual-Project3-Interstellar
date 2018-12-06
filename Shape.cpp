@@ -10,9 +10,7 @@
 
 
 Shape::Shape(double r, double g, double b) {
-    this->b = b;
-    this->r = r;
-    this->g = g;
+    color = Color(r, g, b);
 }
 
 Quadrilateral::Quadrilateral(double r, double g, double b, Point p1, Point p2, Point p3, Point p4) : Shape(r, g, b) {
@@ -34,7 +32,7 @@ Circle::Circle(Point p1, double radius, double r, double g, double b) : Shape(r,
 }
 
 void Triangle::draw() {
-    glColor3d(r, g, b);
+    glColor3d(color.getR(), color.getG(), color.getB());
     glBegin(GL_TRIANGLE_STRIP);
     glVertex2d(point1.getX(), point1.getY());
     glVertex2d(point2.getX(), point2.getY());
@@ -43,7 +41,7 @@ void Triangle::draw() {
 }
 
 void Quadrilateral::draw() {
-    glColor3d(r, g, b);
+    glColor3d(color.getR(), color.getG(), color.getB());
     glBegin(GL_QUADS);
     glVertex2d(point1.getX(), point1.getY());
     glVertex2d(point2.getX(), point2.getY());
@@ -54,7 +52,7 @@ void Quadrilateral::draw() {
 
 void Circle::draw() {
     int iter = 2000;
-    glColor3d(r, g, b);
+    glColor3d(color.getR(), color.getG(), color.getB());
     glBegin(GL_POLYGON);
     for (int i = 0; i < iter; ++i) {
         glVertex2d(radius * cos(2 * pi / iter * i) + center.getX(), radius * sin(2 * pi / iter * i) + center.getY());
@@ -131,4 +129,28 @@ void Triangle::rotate(Point center, double angle) {
     point1 = (point1 - center << angle) + center;
     point2 = (point1 - center << angle) + center;
     point3 = (point1 - center << angle) + center;
+}
+
+void Color::set(double r, double g, double b) {
+    this->g = g;
+    this->b = b;
+    this->r = r;
+}
+
+Color::Color(double r, double g, double b) {
+    this->r = r;
+    this->b = b;
+    this->g = g;
+}
+
+double Color::getB() {
+    return b;
+}
+
+double Color::getG() {
+    return g;
+}
+
+double Color::getR() {
+    return r;
 }
