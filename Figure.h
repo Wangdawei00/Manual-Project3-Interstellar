@@ -6,8 +6,11 @@
 #define MANUAL_PROJECT3_INTERSTELLAR_FIGURE_H
 
 #include "vector.h"
+#include <vector>
 #include "Singleton.h"
+#include "Shape.h"
 
+using namespace std;
 class Figure {
 public:
     virtual void draw() = 0;
@@ -19,7 +22,7 @@ class MainFigure : public Figure {
 public:
     static MainFigure &getInstance();
 
-    void draw() override;
+//    void draw() override;
 
 private:
     MainFigure();
@@ -39,10 +42,18 @@ public:
 
     const Vec &getAnchor() const;
 
-
 private:
     Vec anchor;
-
 };
 
+class Car : public Group {
+public:
+    void draw() override;
+
+private:
+    vector<Circle> wheels;
+    Rect top;
+
+    double width, height;
+};
 #endif //MANUAL_PROJECT3_INTERSTELLAR_FIGURE_H
