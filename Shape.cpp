@@ -3,7 +3,6 @@
 //
 
 #include "Shape.h"
-
 #include <GL/freeglut.h>
 #include <cmath>
 
@@ -71,7 +70,7 @@ Rect::Rect(double r, double g, double b, Point center, double length, double wid
     point2 = center + v2;
     point3 = center * 2 - point1;
     point4 = center * 2 - point2;
-    this->rotate(center, rotationAngle);
+    this->Quadrilateral::rotate(center, rotationAngle);
 }
 
 
@@ -138,4 +137,30 @@ double Color::getR() {
 
 void Shape::setColor(double r, double g, double b) {
     color.set(r, g, b);
+}
+
+IsoTrapezoid::IsoTrapezoid(double r, double g, double b, Point center, double upLength, double downLength,
+                           double height, double angle) : Quadrilateral(r, g, b) {
+    this->center = center;
+    this->downLength = downLength;
+    this->upLength = upLength;
+    this->height = height;
+    rotationAngle = angle;
+    point1 = center + Vec(upLength / 2, height / (upLength + downLength) * upLength);
+    point2 = center + Vec(-upLength / 2, height / (upLength + downLength) * upLength);
+    point3 = center + Vec(-downLength / 2, -height / (upLength + downLength) * downLength);
+    point4 = center + Vec(downLength / 2, -height / (upLength + downLength) * downLength);
+    Quadrilateral::rotate(center, angle);
+}
+
+void Rect::rotate(Point center, double angle) {
+    Quadrilateral::rotate(center, angle);
+    this->rotationAngle += angle;
+    this->center = (this->center - center << angle) + center;
+}
+
+void IsoTrapezoid::rotate(Point center, double angle) {
+    Quadrilateral::rotate(center, angle);
+    this->rotationAngle += angle;
+    this->center = (this->center - center << angle) + center;
 }

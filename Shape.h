@@ -6,8 +6,15 @@
 #define MANUAL_PROJECT3_INTERSTELLAR_SHAPE_H
 static const double pi = 3.1415926535897932;
 
-#include "Figure.h"
+//#include "Figure.h"
 #include "vector.h"
+
+class Figure {
+public:
+    virtual void draw() = 0;
+
+//    virtual ~Figure();
+};
 
 class Color {
 public:
@@ -76,6 +83,8 @@ public:
     explicit Rect(double r = 255, double g = 255, double b = 255, Point center = Vec(0, 0),
                   double length = 0.5, double width = 0.25, double angle = pi / 2);
 
+    void rotate(Point center, double angle) override;
+
 private:
     Point center;
     double length, width;
@@ -95,6 +104,20 @@ public:
 private:
     Point center;
     double radius;
+};
+
+class IsoTrapezoid : public Quadrilateral {
+public:
+    explicit IsoTrapezoid(double r = 255, double g = 255, double b = 255, Point center = Vec(0, 0),
+                          double upLength = 0.1,
+                          double downLength = 0.2, double height = 0.3, double angle = pi / 2);
+
+    void rotate(Point center, double angle) override;
+
+private:
+    Point center;
+    double rotationAngle;
+    double upLength, downLength, height;
 };
 
 #endif //MANUAL_PROJECT3_INTERSTELLAR_SHAPE_H
