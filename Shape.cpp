@@ -60,28 +60,18 @@ void Circle::draw() {
     glFlush();
 }
 
-Parellelogram::Parellelogram(double r, double g, double b, Point center, double angle1, double halfDiagonal1,
-                             double angle2, double halfDiagonal2) : Quadrilateral(r, g, b) {
-    this->center = center;
-    this->angle1 = angle1;
-    this->angle2 = angle2;
-    this->halfDiagonal1 = halfDiagonal1;
-    this->halfDiagonal2 = halfDiagonal2;
-    point1 = Vec(center.getX() + halfDiagonal1 * cos(angle1), center.getY() + halfDiagonal1 * sin(angle1));
-    point2 = Vec(center.getX() - halfDiagonal2 * cos(angle2), center.getY() + halfDiagonal2 * sin(angle2));
-    point3 = Vec(center.getX() - halfDiagonal1 * cos(angle1), center.getY() - halfDiagonal1 * sin(angle1));
-    point4 = Vec(center.getX() + halfDiagonal2 * cos(angle2), center.getY() - halfDiagonal2 * sin(angle2));
-}
 
-
-Rect::Rect(double r, double g, double b, Point center, Point vertex, double angle) : Parellelogram(r, g, b) {
+Rect::Rect(double r, double g, double b, Point center, double length, double width, double angle) :
+        Quadrilateral(r, g, b) {
     this->center = center;
-    this->vertex = vertex;
-    diagonalAngle = angle;
-    point1 = vertex;
-    point2 = (vertex - center << diagonalAngle) + center;
+    this->length = length;
+    rotationAngle = angle;
+    Vec v1(length / 2, width / 2), v2(-length / 2, width / 2);
+    point1 = center + v1;
+    point2 = center + v2;
     point3 = center * 2 - point1;
     point4 = center * 2 - point2;
+    this->rotate(center, rotationAngle);
 }
 
 
@@ -97,10 +87,6 @@ void Circle::move(Vec v) {
     center += v;
 }
 
-void Parellelogram::move(Vec v) {
-    Quadrilateral::move(v);
-    center += v;
-}
 
 void Triangle::move(Vec v) {
     point3 += v;
@@ -119,10 +105,6 @@ void Quadrilateral::rotate(Point center, double angle) {
     point4 = (point1 - center << angle) + center;
 }
 
-void Parellelogram::rotate(Point center, double angle) {
-    Quadrilateral::rotate(center, angle);
-    this->center = (this->center - center << angle) + center;
-}
 
 void Triangle::rotate(Point center, double angle) {
     point1 = (point1 - center << angle) + center;

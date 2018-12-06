@@ -56,21 +56,6 @@ protected:
 
 };
 
-class Parellelogram : public Quadrilateral {
-public:
-    void move(Vec v) override;
-
-    void rotate(Point center, double angle) override;
-
-    explicit Parellelogram(double r = 0, double g = 0, double b = 0, Point center = Vec(0, 0), double angle1 = 0,
-                           double halfDiagonal1 = 0.25, double angle2 = pi / 2, double halfDiagonal2 = 0.25);
-
-protected:
-    double angle1, angle2;// the angle of two adjacent sides;
-    double halfDiagonal1, halfDiagonal2;
-    Point center;
-};
-
 class Triangle : public Shape {
 public:
     void draw() override;
@@ -86,15 +71,15 @@ private:
     Point point1, point2, point3;
 };
 
-class Rect : public Parellelogram {
+class Rect : public Quadrilateral {
 public:
     explicit Rect(double r = 255, double g = 255, double b = 255, Point center = Vec(0, 0),
-                  Point vertex = Vec(0.5, 0.5),
-                  double angle = pi / 2);
+                  double length = 0.5, double width = 0.25, double angle = pi / 2);
 
 private:
-    Point vertex;
-    double diagonalAngle;
+    Point center;
+    double length, width;
+    double rotationAngle;
 };
 
 class Circle : public Shape {
