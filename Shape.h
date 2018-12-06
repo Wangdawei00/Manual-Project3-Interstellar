@@ -123,6 +123,17 @@ private:
 
 
 class SemiCircle : public Shape {
+public:
+    explicit SemiCircle(double r = 255, double g = 255, double b = 255, Point center = Vec(0, 0), double angle = 0);
+
+    void rotate(Point center, double angle) override;
+
+    void draw() override;
+
+private:
+    double radius;
+    double rotationAngle;
+    Point center;
 
 };
 

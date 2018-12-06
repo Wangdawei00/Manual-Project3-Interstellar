@@ -164,3 +164,8 @@ void Circle::move(Vec v) {
     center += v;
 }
 
+SemiCircle::SemiCircle(double r, double g, double b, Point center, double angle) : Shape(r, g, b) {
+    this->center = center;
+    rotationAngle = angle;
+
+}
