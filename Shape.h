@@ -63,6 +63,34 @@ protected:
 
 };
 
+class IsoTrapezoid : public Quadrilateral {
+public:
+    explicit IsoTrapezoid(double r = 255, double g = 255, double b = 255, Point center = Vec(0, 0),
+                          double upLength = 0.1,
+                          double downLength = 0.2, double height = 0.3, double angle = pi / 2);
+
+    void rotate(Point center, double angle) override;
+
+private:
+    Point center;
+    double rotationAngle;
+    double upLength, downLength, height;
+};
+
+
+class Rect : public Quadrilateral {
+public:
+    explicit Rect(double r = 255, double g = 255, double b = 255, Point center = Vec(0, 0),
+                  double length = 0.5, double width = 0.25, double angle = pi / 2);
+
+    void rotate(Point center, double angle) override;
+
+private:
+    Point center;
+    double length, width;
+    double rotationAngle;
+};
+
 class Triangle : public Shape {
 public:
     void draw() override;
@@ -76,19 +104,6 @@ public:
 
 private:
     Point point1, point2, point3;
-};
-
-class Rect : public Quadrilateral {
-public:
-    explicit Rect(double r = 255, double g = 255, double b = 255, Point center = Vec(0, 0),
-                  double length = 0.5, double width = 0.25, double angle = pi / 2);
-
-    void rotate(Point center, double angle) override;
-
-private:
-    Point center;
-    double length, width;
-    double rotationAngle;
 };
 
 class Circle : public Shape {
@@ -106,18 +121,9 @@ private:
     double radius;
 };
 
-class IsoTrapezoid : public Quadrilateral {
-public:
-    explicit IsoTrapezoid(double r = 255, double g = 255, double b = 255, Point center = Vec(0, 0),
-                          double upLength = 0.1,
-                          double downLength = 0.2, double height = 0.3, double angle = pi / 2);
 
-    void rotate(Point center, double angle) override;
+class SemiCircle : public Shape {
 
-private:
-    Point center;
-    double rotationAngle;
-    double upLength, downLength, height;
 };
 
 #endif //MANUAL_PROJECT3_INTERSTELLAR_SHAPE_H
