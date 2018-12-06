@@ -5,11 +5,11 @@
 #include <cmath>
 #include "vector.h"
 
-double Vec::getX() {
+double Vec::getX() const {
     return this->x;
 }
 
-double Vec::getY() {
+double Vec::getY() const {
     return y;
 }
 

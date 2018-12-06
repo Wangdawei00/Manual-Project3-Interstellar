@@ -11,9 +11,9 @@ private:
 public:
     explicit Vec(double x = 0, double y = 0);
 
-    double getX();
+    double getX() const;
 
-    double getY();
+    double getY() const;
 
     Vec operator+(Vec v);
 
