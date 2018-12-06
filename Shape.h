@@ -26,6 +26,8 @@ private:
 };
 
 class Shape : public Figure {
+    void setColor(double r, double g, double b);
+
     void draw() override = 0;
 
     virtual void move(Vec v) = 0;

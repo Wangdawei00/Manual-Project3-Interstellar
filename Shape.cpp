@@ -153,3 +153,7 @@ double Color::getG() {
 double Color::getR() {
     return r;
 }
+
+void Shape::setColor(double r, double g, double b) {
+    color.set(r, g, b);
+}
