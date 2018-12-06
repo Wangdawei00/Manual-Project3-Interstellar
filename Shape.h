@@ -13,7 +13,7 @@ class Figure {
 public:
     virtual void draw() = 0;
 
-//    virtual ~Figure();
+    virtual ~Figure() = 0;
 };
 
 class Color {
