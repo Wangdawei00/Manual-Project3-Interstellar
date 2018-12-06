@@ -13,7 +13,7 @@ class Color {
 public:
     void set(double r, double g, double b);
 
-    explicit Color(double r = 0, double g = 0, double b = 0);
+    explicit Color(double r = 255, double g = 255, double b = 255);
 
     double getR();
 
@@ -56,7 +56,6 @@ protected:
 
 class Parellelogram : public Quadrilateral {
 public:
-
     void move(Vec v) override;
 
     void rotate(Point center, double angle) override;
@@ -88,7 +87,6 @@ private:
 
 class Rect : public Parellelogram {
 public:
-
     explicit Rect(double r = 255, double g = 255, double b = 255, Point center = Vec(0, 0),
                   Point vertex = Vec(0.5, 0.5),
                   double angle = pi / 2);
