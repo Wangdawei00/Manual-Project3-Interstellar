@@ -7,22 +7,16 @@
 
 #include "vector.h"
 #include <vector>
-#include "Singleton.h"
-#include "Shape.h"
-
+//#include "Singleton.h"
 using namespace std;
-class Figure {
-public:
-    virtual void draw() = 0;
 
-//    virtual ~Figure();
-};
+#include "Shape.h"
 
 class MainFigure : public Figure {
 public:
     static MainFigure &getInstance();
 
-//    void draw() override;
+    void draw() override;
 
 private:
     MainFigure();
@@ -56,4 +50,5 @@ private:
 
     double width, height;
 };
+
 #endif //MANUAL_PROJECT3_INTERSTELLAR_FIGURE_H

@@ -19,6 +19,13 @@ const Vec &Group::getAnchor() const {
     return anchor;
 }
 
+void Car::draw() {
+
+}
+
+void MainFigure::draw() {
+
+}
 
 MainFigure::MainFigure() = default;
 
