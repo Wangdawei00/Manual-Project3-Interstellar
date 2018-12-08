@@ -42,13 +42,12 @@ private:
 
 class Car : public Group {
 public:
-    explicit Car(Vec v,double *ang);
     void draw() override;
 
 private:
     vector<Circle> wheels;
-    Rect below;
-    IsoTrapezoid top;
+    Rect top;
+
     double width, height;
 };
 
