@@ -5,7 +5,7 @@
 #ifndef EX3_CAR_H
 #define EX3_CAR_H
 
-#include "figures.h"
+#include "figures_sjl.h"
 
 class Car {
 public:

@@ -2,7 +2,7 @@
 // Created by starrynight on 2018/12/5.
 //
 
-#include "figures.h"
+#include "figures_sjl.h"
 #include <GL/freeglut.h>
 #include <cmath>
 

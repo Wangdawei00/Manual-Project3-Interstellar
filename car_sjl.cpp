@@ -2,8 +2,8 @@
 // Created by starrynight on 2018/12/5.
 //
 
-#include "car.h"
-#include "figures.h"
+#include "car_sjl.h"
+#include "figures_sjl.h"
 
 Car::Car(point pIn, double carLength, double carHeight, double wheelRadius, double windowLength, double ceilingLength) {
     p = pIn;
