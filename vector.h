@@ -34,6 +34,9 @@ public:
     Vec &operator-=(Vec v);
 
     Vec operator-();
+
+    Vec &operator*=(double k);
+
 } Point;
 
 Vec operator*(double k, Vec v);

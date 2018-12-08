@@ -39,6 +39,8 @@ class Shape : public Figure {
 
     virtual void move(Vec v) = 0;
 
+    virtual void zoom(Point center, double coefficient) = 0;
+
     virtual void rotate(Point center, double angle) = 0;
 
 protected:
@@ -54,6 +56,9 @@ public:
     void move(Vec v) override;
 
     void rotate(Point center, double angle) override;
+
+    void zoom(Point center, double coefficient) override;
+
 
     explicit Quadrilateral(double r = 0, double g = 0, double b = 0, Point p1 = Vec(0, 0), Point p2 = Vec(0, 1),
                            Point p3 = Vec(1, 0), Point p4 = Vec(1, 1));
@@ -71,6 +76,8 @@ public:
 
     void rotate(Point center, double angle) override;
 
+    void zoom(Point center, double coefficient) override;
+
 private:
     Point center;
     double rotationAngle;
@@ -84,6 +91,8 @@ public:
                   double length = 0.5, double width = 0.25, double angle = pi / 2);
 
     void rotate(Point center, double angle) override;
+
+    void zoom(Point center, double coefficient) override;
 
 private:
     Point center;
@@ -102,6 +111,8 @@ public:
     explicit Triangle(Point p1 = Vec(0, 0), Point p2 = Vec(1, 0), Point p3 = Vec(0.5, 0.866), double r = 0,
                       double g = 0, double b = 0);
 
+    void zoom(Point center, double coefficient) override;
+
 private:
     Point point1, point2, point3;
 };
@@ -116,6 +127,8 @@ public:
 
     explicit Circle(Point p1 = Vec(0, 0), double radius = 1, double r = 255, double g = 255, double b = 255);
 
+    void zoom(Point center, double coefficient) override;
+
 private:
     Point center;
     double radius;
@@ -127,6 +140,8 @@ public:
     explicit SemiCircle(double r = 255, double g = 255, double b = 255, Point center = Vec(0, 0), double angle = 0);
 
     void rotate(Point center, double angle) override;
+
+    void zoom(Point center, double coefficient) override;
 
     void move(Vec v) override;
 

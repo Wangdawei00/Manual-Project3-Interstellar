@@ -68,3 +68,8 @@ Vec &Vec::operator-=(Vec v) {
 Vec operator*(double k, Vec v) {
     return v * k;
 }
+
+Vec &Vec::operator*=(double k) {
+    (*this) = (*this) * k;
+    return *this;
+}

@@ -65,9 +65,16 @@ void Quadrilateral::move(Vec v) {
 
 void Quadrilateral::rotate(Point center, double angle) {
     point1 = (point1 - center << angle) + center;
-    point2 = (point1 - center << angle) + center;
-    point3 = (point1 - center << angle) + center;
-    point4 = (point1 - center << angle) + center;
+    point2 = (point2 - center << angle) + center;
+    point3 = (point3 - center << angle) + center;
+    point4 = (point4 - center << angle) + center;
+}
+
+void Quadrilateral::zoom(Point center, double coefficient) {
+    point1 = (point1 - center) * coefficient + center;
+    point2 = (point2 - center) * coefficient + center;
+    point3 = (point3 - center) * coefficient + center;
+    point4 = (point4 - center) * coefficient + center;
 }
 
 Rect::Rect(double r, double g, double b, Point center, double length, double width, double angle) :
@@ -81,6 +88,13 @@ Rect::Rect(double r, double g, double b, Point center, double length, double wid
     point3 = center * 2 - point1;
     point4 = center * 2 - point2;
     Quadrilateral::rotate(center, rotationAngle);
+}
+
+void Rect::zoom(Point center, double coefficient) {
+    this->center = (this->center - center) * coefficient + center;
+    length *= coefficient;
+    width *= coefficient;
+    Quadrilateral::zoom(center, coefficient);
 }
 
 void Rect::rotate(Point center, double angle) {
@@ -103,6 +117,13 @@ IsoTrapezoid::IsoTrapezoid(double r, double g, double b, Point center, double up
     Quadrilateral::rotate(center, angle);
 }
 
+void IsoTrapezoid::zoom(Point center, double coefficient) {
+    this->center = (this->center - center) * coefficient + center;
+    upLength *= coefficient;
+    downLength *= coefficient;
+    height *= coefficient;
+    Quadrilateral::zoom(center, coefficient);
+}
 
 void IsoTrapezoid::rotate(Point center, double angle) {
     Quadrilateral::rotate(center, angle);
@@ -120,10 +141,15 @@ void Triangle::move(Vec v) {
 
 void Triangle::rotate(Point center, double angle) {
     point1 = (point1 - center << angle) + center;
-    point2 = (point1 - center << angle) + center;
-    point3 = (point1 - center << angle) + center;
+    point2 = (point2 - center << angle) + center;
+    point3 = (point3 - center << angle) + center;
 }
 
+void Triangle::zoom(Point center, double coefficient) {
+    point1 = (point1 - center) * coefficient + center;
+    point2 = (point2 - center) * coefficient + center;
+    point3 = (point3 - center) * coefficient + center;
+}
 
 Triangle::Triangle(Point p1, Point p2, Point p3, double r, double g, double b) : Shape(r, g, b) {
     point1 = p1;
@@ -143,6 +169,11 @@ void Triangle::draw() {
 Circle::Circle(Point p1, double radius, double r, double g, double b) : Shape(r, g, b) {
     this->radius = radius;
     center = p1;
+}
+
+void Circle::zoom(Point center, double coefficient) {
+    this->center = (this->center - center) * coefficient + center;
+    radius *= coefficient;
 }
 
 void Circle::draw() {
@@ -188,4 +219,9 @@ void SemiCircle::draw() {
     }
     glEnd();
     glFlush();
+}
+
+void SemiCircle::zoom(Point center, double coefficient) {
+    this->center = (this->center - center) * coefficient + center;
+    radius *= coefficient;
 }
