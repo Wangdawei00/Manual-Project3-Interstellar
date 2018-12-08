@@ -42,13 +42,26 @@ private:
 
 class Car : public Group {
 public:
+    explicit Car(Vec v,double *ang);
+    void set(double w,double h);
     void draw() override;
 
 private:
     vector<Circle> wheels;
-    Rect top;
-
+    Rect below;
+    IsoTrapezoid top;
     double width, height;
+};
+
+class Teleported : public Group{
+    explicit Teleported(Vec v);
+    void set(double w,double h);
+    void draw() override;
+    void randomColor();
+private:
+    Rect rec;
+    double width, height;
+    double r,g,b;
 };
 
 #endif //MANUAL_PROJECT3_INTERSTELLAR_FIGURE_H
