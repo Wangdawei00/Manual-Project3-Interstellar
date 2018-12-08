@@ -15,17 +15,17 @@ public:
 
     double getY() const;
 
-    Vec operator+(Vec v);
+    Vec operator+(Vec v) const;
 
-    Vec operator-(Vec v);
+    Vec operator-(Vec v) const;
 
-    double operator*(Vec v);
+    double operator*(Vec v) const;
 
-    Vec operator*(double k);
+    Vec operator*(double k) const;
 
-    Vec operator<<(double angle);
+    Vec operator<<(double angle) const;
 
-    Vec operator>>(double angle);
+    Vec operator>>(double angle) const;
 
     Vec &operator=(Vec v);
 
@@ -33,7 +33,7 @@ public:
 
     Vec &operator-=(Vec v);
 
-    Vec operator-();
+    Vec operator-() const;
 
     Vec &operator*=(double k);
 
