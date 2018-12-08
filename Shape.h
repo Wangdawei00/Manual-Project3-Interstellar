@@ -13,7 +13,7 @@ class Figure {
 public:
     virtual void draw() = 0;
 
-//    virtual ~Figure() = 0;
+   // virtual ~Figure() = 0;
 };
 
 class Color {
@@ -33,6 +33,7 @@ private:
 };
 
 class Shape : public Figure {
+public:
     void setColor(double r, double g, double b);
 
     void draw() override = 0;
@@ -42,6 +43,8 @@ class Shape : public Figure {
     virtual void zoom(Point center, double coefficient) = 0;
 
     virtual void rotate(Point center, double angle) = 0;
+
+    ~Shape();
 
 protected:
     explicit Shape(double r = 0, double g = 0, double b = 0);
@@ -137,8 +140,7 @@ private:
 
 class SemiCircle : public Shape {
 public:
-    explicit SemiCircle(double r = 255, double g = 255, double b = 255, Point center = Vec(0, 0), double radius = 0.5,
-                        double angle = 0);
+    explicit SemiCircle(double r = 255, double g = 255, double b = 255, Point center = Vec(0, 0),double radius=0.5,double angle = 0);
 
     void rotate(Point center, double angle) override;
 
@@ -152,7 +154,7 @@ private:
     double radius;
     double rotationAngle;
     Point center;
-
 };
+
 
 #endif //MANUAL_PROJECT3_INTERSTELLAR_SHAPE_H
