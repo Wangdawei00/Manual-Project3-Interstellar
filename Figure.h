@@ -51,4 +51,16 @@ private:
     double width, height;
 };
 
+ class UFO :public  Group{
+public:void draw() override;
+    void move(Vec moveToward);
+    void rotate(double angleTurning);
+    explicit  UFO(Vec initial);
+    ~UFO();
+
+private:
+Vec center;
+double angle;
+};
+
 #endif //MANUAL_PROJECT3_INTERSTELLAR_FIGURE_H

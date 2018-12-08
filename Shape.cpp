@@ -195,9 +195,10 @@ void Circle::move(Vec v) {
     center += v;
 }
 
-SemiCircle::SemiCircle(double r, double g, double b, Point center, double angle) : Shape(r, g, b) {
+SemiCircle::SemiCircle(double r, double g, double b, Point center,double radius, double angle) : Shape(r, g, b) {
     this->center = center;
     rotationAngle = angle;
+    this->radius=radius;
 }
 
 void SemiCircle::rotate(Point center, double angle) {
@@ -214,8 +215,8 @@ void SemiCircle::draw() {
     glBegin(GL_POLYGON);
     int iter = 2000;
     for (int i = 0; i < iter; ++i) {
-        glVertex2d(radius * cos(2 * pi / iter * i + rotationAngle) + center.getX(),
-                   radius * sin(2 * pi / iter * i + rotationAngle) + center.getY());
+        glVertex2d(radius * cos( pi / iter * i + rotationAngle) + center.getX(),
+                   radius * sin( pi / iter * i + rotationAngle) + center.getY());
     }
     glEnd();
     glFlush();
