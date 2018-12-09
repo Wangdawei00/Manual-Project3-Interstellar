@@ -42,8 +42,10 @@ private:
 
 class Car : public Group {
 public:
-    explicit Car(Vec v,double *ang);
-    void set(double w,double h);
+    explicit Car(Vec v, double *ang);
+
+    void set(double w, double h);
+
     void draw() override;
 
 private:
@@ -53,35 +55,71 @@ private:
     double width, height;
 };
 
-class Teleported : public Group{
+class Teleported : public Group {
     explicit Teleported(Vec v);
-    void set(double w,double h);
+
+    void set(double w, double h);
+
     void draw() override;
+
     void randomColor();
+
 private:
     Rect rec;
     double width, height;
-    double r,g,b;
+    double r, g, b;
 };
 
- class UFO :public  Group{
-public:void draw() override;
+class UFO : public Group {
+public:
+    void draw() override;
+
     void move(Vec moveToward);
-    void rotate(Vec centerPoint,double angleTurning);
+
+    void rotate(Vec centerPoint, double angleTurning);
+
     void spin();
-    explicit  UFO(Vec initial);
+
+    explicit UFO(Vec initial);
+
     ~UFO();
 
 private:
-     Shape* all[5] ;
-Vec center;
-double angle;
-double bodyRadius;
-double wheelUpLength;
-double wheelDownLength;
-double wheelHeight;
-double antennaLength;
+    Shape *all[5];
+    Vec center;
+    double angle;
+    double bodyRadius;
+    double wheelUpLength;
+    double wheelDownLength;
+    double wheelHeight;
+    double antennaLength;
 
+};
+
+class Rocket : public Group {
+    explicit Rocket(Vec initial);
+
+    void draw() override;
+
+    void move(Vec moveToward);
+
+    void rotate(Vec centerPoint, double angleTurning);
+
+    void zoom(double coefficient);
+
+    ~Rocket();
+
+private:
+    Shape *all[8];
+    Vec center;
+    double angle;
+    double bodyWidth;
+    double bodyHeight;
+    double wingLength;
+    double wingHeight;
+    double jetHeight;
+    double roofHeight;
+    double jetUpLength;
 };
 
 #endif //MANUAL_PROJECT3_INTERSTELLAR_FIGURE_H
