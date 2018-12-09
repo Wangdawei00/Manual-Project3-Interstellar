@@ -7,10 +7,9 @@
 
 #include "vector.h"
 #include <vector>
-//#include "Singleton.h"
-using namespace std;
-
 #include "Shape.h"
+
+using namespace std;
 
 class MainFigure : public Figure {
 public:
@@ -57,6 +56,7 @@ private:
 };
 
 class Teleported : public Group {
+public:
     explicit Teleported(Vec v);
 
     void set(double w, double h);
@@ -95,6 +95,7 @@ private:
 };
 
 class Rocket : public Group {
+public:
     explicit Rocket(Vec initial);
 
 //    void draw() override;
@@ -120,4 +121,5 @@ private:
 };
 
 inline double rand0to1();
+
 #endif //MANUAL_PROJECT3_INTERSTELLAR_FIGURE_H
