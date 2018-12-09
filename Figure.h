@@ -36,10 +36,10 @@ public:
 
     const Vec &getAnchor() const;
 
-//    virtual ~Group() = 0;
+    ~Group();
 
 protected:
-    vector<Shape> shapes;
+    vector<Shape *> shapes;
 private:
     Vec anchor;
 
@@ -47,7 +47,7 @@ private:
 
 class Car : public Group {
 public:
-    explicit Car(Vec v, double *ang);
+    explicit Car(Vec v, double ang);
 
     void set(double w, double h);
 

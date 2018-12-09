@@ -226,3 +226,21 @@ void SemiCircle::zoom(Point center, double coefficient) {
     this->center = (this->center - center) * coefficient + center;
     radius *= coefficient;
 }
+
+Shape::~Shape() = default;
+
+SemiCircle::~SemiCircle() = default;
+
+//
+Quadrilateral::~Quadrilateral() = default;
+
+//
+Circle::~Circle() = default;
+
+//
+Triangle::~Triangle() = default;
+
+//
+IsoTrapezoid::~IsoTrapezoid() = default;
+
+Rect::~Rect() = default;

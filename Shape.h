@@ -66,6 +66,7 @@ public:
     explicit Quadrilateral(double r = 0, double g = 0, double b = 0, Point p1 = Vec(0, 0), Point p2 = Vec(0, 1),
                            Point p3 = Vec(1, 0), Point p4 = Vec(1, 1));
 
+    ~Quadrilateral() override;
 protected:
     Point point1, point2, point3, point4;//counterclockwise
 
@@ -81,6 +82,7 @@ public:
 
     void zoom(Point center, double coefficient) override;
 
+    ~IsoTrapezoid() override;
 private:
     Point center;
     double rotationAngle;
@@ -97,6 +99,7 @@ public:
 
     void zoom(Point center, double coefficient) override;
 
+    ~Rect() override;
 private:
     Point center;
     double length, width;
@@ -116,6 +119,8 @@ public:
 
     void zoom(Point center, double coefficient) override;
 
+    ~Triangle() override;
+
 private:
     Point point1, point2, point3;
 };
@@ -132,6 +137,7 @@ public:
 
     void zoom(Point center, double coefficient) override;
 
+    ~Circle() override;
 private:
     Point center;
     double radius;
@@ -150,6 +156,8 @@ public:
     void move(Vec v) override;
 
     void draw() const override;
+
+    ~SemiCircle() override;
 
 private:
     double radius;
