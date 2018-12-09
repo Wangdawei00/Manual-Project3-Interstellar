@@ -12,15 +12,15 @@ Color::Color(double r, double g, double b) {
     this->g = g;
 }
 
-double Color::getB() {
+double Color::getB() const {
     return b;
 }
 
-double Color::getG() {
+double Color::getG() const {
     return g;
 }
 
-double Color::getR() {
+double Color::getR() const {
     return r;
 }
 
@@ -38,7 +38,6 @@ void Shape::setColor(double r, double g, double b) {
     color.set(r, g, b);
 }
 
-Shape::~Shape()=default;
 
 Quadrilateral::Quadrilateral(double r, double g, double b, Point p1, Point p2, Point p3, Point p4) : Shape(r, g, b) {
     point1 = p1;
@@ -47,7 +46,7 @@ Quadrilateral::Quadrilateral(double r, double g, double b, Point p1, Point p2, P
     point4 = p4;
 }
 
-void Quadrilateral::draw() {
+void Quadrilateral::draw() const {
     glColor3d(color.getR(), color.getG(), color.getB());
     glBegin(GL_QUADS);
     glVertex2d(point1.getX(), point1.getY());
@@ -158,7 +157,7 @@ Triangle::Triangle(Point p1, Point p2, Point p3, double r, double g, double b) :
     point3 = p3;
 }
 
-void Triangle::draw() {
+void Triangle::draw() const {
     glColor3d(color.getR(), color.getG(), color.getB());
     glBegin(GL_TRIANGLE_STRIP);
     glVertex2d(point1.getX(), point1.getY());
@@ -177,7 +176,7 @@ void Circle::zoom(Point center, double coefficient) {
     radius *= coefficient;
 }
 
-void Circle::draw() {
+void Circle::draw() const {
     int iter = 2000;
     glColor3d(color.getR(), color.getG(), color.getB());
     glBegin(GL_POLYGON);
@@ -196,10 +195,10 @@ void Circle::move(Vec v) {
     center += v;
 }
 
-SemiCircle::SemiCircle(double r, double g, double b, Point center,double radius, double angle) : Shape(r, g, b) {
+SemiCircle::SemiCircle(double r, double g, double b, Point center, double radius, double angle) : Shape(r, g, b) {
     this->center = center;
     rotationAngle = angle;
-    this->radius=radius;
+    this->radius = radius;
 }
 
 void SemiCircle::rotate(Point center, double angle) {
@@ -211,13 +210,13 @@ void SemiCircle::move(Vec v) {
     center += v;
 }
 
-void SemiCircle::draw() {
+void SemiCircle::draw() const {
     glColor3d(color.getR(), color.getG(), color.getB());
     glBegin(GL_POLYGON);
     int iter = 2000;
     for (int i = 0; i < iter; ++i) {
-        glVertex2d(radius * cos( pi / iter * i + rotationAngle) + center.getX(),
-                   radius * sin( pi / iter * i + rotationAngle) + center.getY());
+        glVertex2d(radius * cos(pi / iter * i + rotationAngle) + center.getX(),
+                   radius * sin(pi / iter * i + rotationAngle) + center.getY());
     }
     glEnd();
     glFlush();

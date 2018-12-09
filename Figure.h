@@ -16,7 +16,7 @@ class MainFigure : public Figure {
 public:
     static MainFigure &getInstance();
 
-    void draw() override;
+    void draw() const override;
 
 private:
     MainFigure();
@@ -30,14 +30,19 @@ private:
 
 class Group : public Figure {
 public:
-    void draw() override = 0;
+    void draw() const override;
 
     void setAnchor(Vec v);
 
     const Vec &getAnchor() const;
 
+//    virtual ~Group() = 0;
+
+protected:
+    vector<Shape> shapes;
 private:
     Vec anchor;
+
 };
 
 class Car : public Group {
@@ -46,12 +51,8 @@ public:
 
     void set(double w, double h);
 
-    void draw() override;
 
 private:
-    vector<Circle> wheels;
-    Rect below;
-    IsoTrapezoid top;
     double width, height;
 };
 
@@ -60,19 +61,17 @@ class Teleported : public Group {
 
     void set(double w, double h);
 
-    void draw() override;
 
     void randomColor();
 
 private:
-    Rect rec;
     double width, height;
     double r, g, b;
 };
 
 class UFO : public Group {
 public:
-    void draw() override;
+//    void draw() override;
 
     void move(Vec moveToward);
 
@@ -82,10 +81,9 @@ public:
 
     explicit UFO(Vec initial);
 
-    ~UFO();
+//    ~UFO();
 
 private:
-    Shape *all[5];
     Vec center;
     double angle;
     double bodyRadius;
@@ -99,7 +97,7 @@ private:
 class Rocket : public Group {
     explicit Rocket(Vec initial);
 
-    void draw() override;
+//    void draw() override;
 
     void move(Vec moveToward);
 
@@ -107,10 +105,9 @@ class Rocket : public Group {
 
     void zoom(double coefficient);
 
-    ~Rocket();
+//    ~Rocket();
 
 private:
-    Shape *all[8];
     Vec center;
     double angle;
     double bodyWidth;
@@ -122,4 +119,5 @@ private:
     double jetUpLength;
 };
 
+inline double rand0to1();
 #endif //MANUAL_PROJECT3_INTERSTELLAR_FIGURE_H

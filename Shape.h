@@ -11,9 +11,9 @@ static const double pi = 3.1415926535897932;
 
 class Figure {
 public:
-    virtual void draw() = 0;
+    virtual void draw() const = 0;
 
-   // virtual ~Figure() = 0;
+    // virtual ~Figure() = 0;
 };
 
 class Color {
@@ -22,11 +22,11 @@ public:
 
     explicit Color(double r = 255, double g = 255, double b = 255);
 
-    double getR();
+    double getR() const;
 
-    double getB();
+    double getB() const;
 
-    double getG();
+    double getG() const;
 
 private:
     double r, g, b;
@@ -36,7 +36,7 @@ class Shape : public Figure {
 public:
     void setColor(double r, double g, double b);
 
-    void draw() override = 0;
+    void draw() const override = 0;
 
     virtual void move(Vec v) = 0;
 
@@ -44,7 +44,7 @@ public:
 
     virtual void rotate(Point center, double angle) = 0;
 
-    ~Shape();
+    virtual ~Shape() = 0;
 
 protected:
     explicit Shape(double r = 0, double g = 0, double b = 0);
@@ -54,7 +54,7 @@ protected:
 
 class Quadrilateral : public Shape {
 public:
-    void draw() override;
+    void draw() const override;
 
     void move(Vec v) override;
 
@@ -105,7 +105,7 @@ private:
 
 class Triangle : public Shape {
 public:
-    void draw() override;
+    void draw() const override;
 
     void move(Vec v) override;
 
@@ -122,7 +122,7 @@ private:
 
 class Circle : public Shape {
 public:
-    void draw() override;
+    void draw() const override;
 
     void move(Vec v) override;
 
@@ -140,7 +140,8 @@ private:
 
 class SemiCircle : public Shape {
 public:
-    explicit SemiCircle(double r = 255, double g = 255, double b = 255, Point center = Vec(0, 0),double radius=0.5,double angle = 0);
+    explicit SemiCircle(double r = 255, double g = 255, double b = 255, Point center = Vec(0, 0), double radius = 0.5,
+                        double angle = 0);
 
     void rotate(Point center, double angle) override;
 
@@ -148,7 +149,7 @@ public:
 
     void move(Vec v) override;
 
-    void draw() override;
+    void draw() const override;
 
 private:
     double radius;
