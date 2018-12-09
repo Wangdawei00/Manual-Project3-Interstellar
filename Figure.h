@@ -43,6 +43,7 @@ public:
 
 protected:
     vector<Shape *> shapes;
+    double size;
 private:
     Vec anchor;
 
@@ -50,7 +51,7 @@ private:
 
 class Car : public Group {
 public:
-    explicit Car(Vec v = Vec(0, 0), double angle = 0, int size = 1);
+    explicit Car(Vec v = Vec(0, 0), double angle = 0, double size = 1);
 
     void set(double w, double h);
 
@@ -60,16 +61,14 @@ private:
 
 class Teleported : public Group {
 public:
-    explicit Teleported(Vec v = Vec(0, 0), int size = 1);
+    explicit Teleported(Vec v = Vec(0, 0), double size = 1);
 
     void set(double w, double h);
-
 
     void randomColor();
 
 private:
     double width, height;
-    double r, g, b;
 };
 
 class UFO : public Group {
@@ -81,7 +80,7 @@ public:
 
     void spin();
 
-    explicit UFO(Vec initial = Vec(0, 0), double angle = 0, int size = 1);
+    explicit UFO(Vec initial = Vec(0, 0), double angle = 0, double size = 1);
 
 //    ~UFO();
 
@@ -98,11 +97,11 @@ private:
 
 class Rocket : public Group {
 public:
-    explicit Rocket(Vec initial = Vec(0, 0), double angle = 0, int size = 1);
+    explicit Rocket(Vec initial = Vec(0, 0), double angle = 0, double size = 1);
 
 //    void rotate(Vec centerPoint, double angleTurning);
 
-    void zoom(double coefficient);
+    void zoom();
 
 //    ~Rocket();
 
@@ -116,6 +115,10 @@ private:
     double jetHeight;
     double roofHeight;
     double jetUpLength;
+
+    void zoomIn();
+
+    void zoomOut();
 };
 
 inline double rand0to1();
