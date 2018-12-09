@@ -7,8 +7,6 @@
 #include <cmath>
 #include <random>
 
-//Figure::~Figure() = default;
-
 inline double rand0to1() {
     return rand() * 1.0 / RAND_MAX;
 }
@@ -26,17 +24,40 @@ const Vec &Group::getAnchor() const {
     return anchor;
 }
 
-Car::Car(Vec v, double ang) {
+void Group::draw() const {
+    for (auto const &item:shapes)
+        item->draw();
+}
+
+Group::~Group() {
+    for (auto &item:shapes)
+        delete item;
+}
+
+void Group::move(Vec v) {
+    for (auto &item:shapes) {
+        item->move(v);
+    }
+}
+
+void Group::rotate(Point center, double angle) {
+    for (auto &item:shapes) {
+        item->rotate(center, angle);
+    }
+}
+
+Car::Car(Vec v, double angle, int size) {
     setAnchor(v);
-    set(.16, .08);
+    set(.16 * size, .08 * size);
     shapes.push_back(new IsoTrapezoid(rand0to1(), rand0to1(), rand0to1(), Vec(v.getX(), v.getY() + height / 4),
-                                      .375 * width, .625 * width, height / 2, ang));
+                                      .375 * width, .625 * width, height / 2, 0));
     shapes.push_back(new Rect(rand0to1(), rand0to1(), rand0to1(), Vec(v.getX(), v.getY() - height * .1875), width,
-                              height * .375, ang));
+                              height * .375, 0));
     shapes.push_back(new Circle(Vec(v.getX() - width / 4, v.getY() - height * .375), height / 8, rand0to1(), rand0to1(),
                                 rand0to1()));
     shapes.push_back(new Circle(Vec(v.getX() + width / 4, v.getY() - height * .375), height / 8, rand0to1(), rand0to1(),
                                 rand0to1()));
+    rotate(v, angle);
 }
 
 void Car::set(double w, double h) {
@@ -44,16 +65,9 @@ void Car::set(double w, double h) {
     height = h;
 }
 
-//void Car::draw() {
-//    top.draw();
-//    below.draw();
-//    wheels[0].draw();
-//    wheels[1].draw();
-//}
-
-Teleported::Teleported(Vec v) {
+Teleported::Teleported(Vec v, int size) {
     Teleported::setAnchor(v);
-    Teleported::set(.16, .08);
+    Teleported::set(.16 * size, .08 * size);
     shapes.push_back(new Rect(rand0to1(), rand0to1(), rand0to1(), v, width, height, 0));
 }
 
@@ -66,78 +80,49 @@ void Teleported::set(double w, double h) {
     height = h;
 }
 
-//void Teleported::draw() {
-//    rec.draw();
-//}
-
-UFO::UFO(Vec initial) {
-    bodyRadius = 0.04;
-    wheelUpLength = 0.02;
-    wheelDownLength = 0.03;
-    wheelHeight = 0.02;
-    antennaLength = 0.01;
+UFO::UFO(Vec initial, double angle, int size) {
+    bodyRadius = 0.04 * size;
+    wheelUpLength = 0.02 * size;
+    wheelDownLength = 0.03 * size;
+    wheelHeight = 0.02 * size;
+    antennaLength = 0.01 * size;
     center = initial;
-    angle = 0;
-    shapes.push_back(new SemiCircle(rand0to1(), rand0to1(), rand0to1(), center, bodyRadius, angle));
+    this->angle = angle;
+    shapes.push_back(new SemiCircle(rand0to1(), rand0to1(), rand0to1(), center, bodyRadius, 0));
     Vec leftWheelCenter;
     leftWheelCenter = center + Vec(-0.02, -0.01);
     shapes.push_back(new IsoTrapezoid(rand0to1(), rand0to1(), rand0to1(), leftWheelCenter, wheelUpLength,
-                                      wheelDownLength, wheelHeight, angle));
+                                      wheelDownLength, wheelHeight, 0));
     Vec rightWheelCenter;
     rightWheelCenter = center + (Vec(0.02, -0.01));
     shapes.push_back(new IsoTrapezoid(rand0to1(), rand0to1(), rand0to1(), rightWheelCenter, wheelUpLength,
-                                      wheelDownLength, wheelHeight, angle));
+                                      wheelDownLength, wheelHeight, 0));
     Vec leftAntennaCenter;
     leftAntennaCenter = center + (Vec(cos(2.0 / 3.0 * pi) * bodyRadius, sin(2.0 / 3.0 * pi) * bodyRadius));
     shapes.push_back(new Rect(rand0to1(), rand0to1(), rand0to1(), leftAntennaCenter, antennaLength, 0.005,
-                              2.0 / 3.0 * pi + angle));
+                              2.0 / 3.0 * pi + 0));
     Vec rightAntennaCenter;
     rightAntennaCenter = center + (Vec(cos(1.0 / 3.0 * pi) * bodyRadius, sin(1.0 / 3.0 * pi) * bodyRadius));
     shapes.push_back(new Rect(rand0to1(), rand0to1(), rand0to1(), rightAntennaCenter, antennaLength, 0.005,
-                              1.0 / 3.0 * pi + angle));
+                              1.0 / 3.0 * pi + 0));
+    rotate(initial, angle);
 }
-
-//void UFO::draw() {
-//    for (auto const &item:all) {
-//        item->draw();
-//    }
-//}
-
-void UFO::move(Vec a) {
-    center = center + a;
-    for (auto &item:shapes)
-        item->move(a);
-}
-
-void UFO::rotate(Vec centerPoint, double angleTurnig) {
-    for (auto &item:shapes) {
-        item->rotate(centerPoint, angleTurnig);
-    }
-};
 
 void UFO::spin() {
-    for (auto &item:shapes) {
-        item->rotate(center, 0.1);
-    }
+    rotate(center, 0.1);
 }
 
-//UFO::~UFO() {
-//    for (auto const &item:all) {
-//        delete item;
-//    }
-//};
-
-Rocket::Rocket(Vec initial) {
-    bodyWidth = 0.04;
-    bodyHeight = 0.08;
-    wingLength = 0.02;
-    wingHeight = 0.04;
-    jetHeight = 0.02;
-    roofHeight = 0.02;
-    jetUpLength = 0.04 / 3.00;
-    angle = 0;
+Rocket::Rocket(Vec initial, double angle, int size) {
+    bodyWidth = 0.04 * size;
+    bodyHeight = 0.08 * size;
+    wingLength = 0.02 * size;
+    wingHeight = 0.04 * size;
+    jetHeight = 0.02 * size;
+    roofHeight = 0.02 * size;
+    jetUpLength = 0.04 * size / 3.00;
+    this->angle = angle;
     center = initial;
-    shapes.push_back(new Rect(rand0to1(), rand0to1(), rand0to1(), center, bodyHeight, bodyWidth, angle));
+    shapes.push_back(new Rect(rand0to1(), rand0to1(), rand0to1(), center, bodyHeight, bodyWidth, 0));
     Vec wingP1 = center + Vec(-wingLength - 0.5 * bodyWidth, -0.5 * bodyHeight),
             wingP2 = center + Vec(-0.5 * bodyWidth, -0.5 * bodyHeight),
             wingP3 = center + Vec(-0.5 * bodyWidth, -0.5 * bodyHeight + wingHeight);
@@ -150,40 +135,23 @@ Rocket::Rocket(Vec initial) {
     shapes.push_back(new
                              IsoTrapezoid(rand0to1(), rand0to1(), rand0to1(), IsoTrapezoidCenter, jetUpLength,
                                           bodyWidth, jetHeight,
-                                          angle));
+                                          0));
     Vec roofP1 = center + Vec(-0.5 * bodyWidth, 0.5 * bodyHeight),
             roofP2 = center + Vec(0.5 * bodyWidth, 0.5 * bodyHeight),
             roofP3 = center + Vec(0, 0.5 * bodyHeight + roofHeight);
-    shapes.push_back(new Triangle(roofP1, roofP2, roofP3, 0, 0, 1));
+    shapes.push_back(new Triangle(roofP1, roofP2, roofP3, rand0to1(), rand0to1(), rand0to1()));
     Vec RectCenter = center + Vec(0, -(1.0 / 3.0) * bodyHeight);
     shapes.push_back(new
                              Rect(rand0to1(), rand0to1(), rand0to1(), RectCenter, (1.0 / 3.0) * bodyHeight,
                                   (1.0 / 3.0) * bodyWidth,
-                                  angle));
+                                  0));
     RectCenter = center + Vec(0.25 * bodyWidth, 0.25 * bodyHeight);
     shapes.push_back(
-            new Rect(rand0to1(), rand0to1(), rand0to1(), RectCenter, 0.25 * bodyHeight, 0.25 * bodyWidth, angle));
+            new Rect(rand0to1(), rand0to1(), rand0to1(), RectCenter, 0.25 * bodyHeight, 0.25 * bodyWidth, 0));
     RectCenter = center + Vec(-0.25 * bodyWidth, 0.25 * bodyHeight);
     shapes.push_back(
-            new Rect(rand0to1(), rand0to1(), rand0to1(), RectCenter, 0.25 * bodyHeight, 0.25 * bodyWidth, angle));
-}
-
-//void Rocket::draw() {
-//    for (auto const &item:all) {
-//        item->draw();
-//    }
-//}
-
-void Rocket::move(Vec moveToward) {
-    for (auto &item:shapes) {
-        item->move(moveToward);
-    }
-}
-
-void Rocket::rotate(Vec centerPoint, double angleTurning) {
-    for (auto &item:shapes) {
-        item->rotate(centerPoint, angleTurning);
-    }
+            new Rect(rand0to1(), rand0to1(), rand0to1(), RectCenter, 0.25 * bodyHeight, 0.25 * bodyWidth, 0));
+    rotate(center, angle);
 }
 
 void Rocket::zoom(double coefficient) {
@@ -191,12 +159,6 @@ void Rocket::zoom(double coefficient) {
         item->zoom(center, coefficient);
     }
 }
-
-//Rocket::~Rocket() {
-//    for (int i = 0; i < 8; ++i) {
-//        delete (all[i]);
-//    }
-//}
 
 void MainFigure::draw() const {
 
@@ -207,12 +169,3 @@ MainFigure::MainFigure() = default;
 
 MainFigure::~MainFigure() = default;
 
-void Group::draw() const {
-    for (auto const &item:shapes)
-        item->draw();
-}
-
-Group::~Group() {
-    for (auto &item:shapes)
-        delete item;
-}

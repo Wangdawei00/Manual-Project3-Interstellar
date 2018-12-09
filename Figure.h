@@ -35,6 +35,10 @@ public:
 
     const Vec &getAnchor() const;
 
+    void move(Vec v);
+
+    void rotate(Point center, double angle);
+
     ~Group();
 
 protected:
@@ -46,10 +50,9 @@ private:
 
 class Car : public Group {
 public:
-    explicit Car(Vec v, double ang);
+    explicit Car(Vec v = Vec(0, 0), double angle = 0, int size = 1);
 
     void set(double w, double h);
-
 
 private:
     double width, height;
@@ -57,7 +60,7 @@ private:
 
 class Teleported : public Group {
 public:
-    explicit Teleported(Vec v);
+    explicit Teleported(Vec v = Vec(0, 0), int size = 1);
 
     void set(double w, double h);
 
@@ -71,15 +74,14 @@ private:
 
 class UFO : public Group {
 public:
-//    void draw() override;
 
-    void move(Vec moveToward);
+//    void move(Vec moveToward);
 
-    void rotate(Vec centerPoint, double angleTurning);
+//    void rotate(Vec centerPoint, double angleTurning);
 
     void spin();
 
-    explicit UFO(Vec initial);
+    explicit UFO(Vec initial = Vec(0, 0), double angle = 0, int size = 1);
 
 //    ~UFO();
 
@@ -96,13 +98,9 @@ private:
 
 class Rocket : public Group {
 public:
-    explicit Rocket(Vec initial);
+    explicit Rocket(Vec initial = Vec(0, 0), double angle = 0, int size = 1);
 
-//    void draw() override;
-
-    void move(Vec moveToward);
-
-    void rotate(Vec centerPoint, double angleTurning);
+//    void rotate(Vec centerPoint, double angleTurning);
 
     void zoom(double coefficient);
 
