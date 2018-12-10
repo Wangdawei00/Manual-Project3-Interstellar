@@ -9,8 +9,6 @@
 #include <vector>
 #include "Shape.h"
 
-using namespace std;
-
 class MainFigure : public Figure {
 public:
     static MainFigure &getInstance();
@@ -42,7 +40,7 @@ public:
     ~Group();
 
 protected:
-    vector<Shape *> shapes;
+    std::vector<Shape *> shapes;
     double size;
 private:
     Vec anchor;
