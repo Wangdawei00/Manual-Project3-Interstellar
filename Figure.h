@@ -67,10 +67,7 @@ public:
 
     void set(double w, double h);
 
-//    void randomColor();
-
     void specialMove() override;
-
 
 private:
     double width, height;
@@ -78,22 +75,11 @@ private:
 
 class UFO : public Group {
 public:
-
-//    void move(Vec moveToward);
-
-//    void rotate(Vec centerPoint, double angleTurning);
-
-//    void spin();
-
     explicit UFO(Vec initial = Vec(0, 0), double angle = 0, double size = 1);
 
     void specialMove() override;
 
-
-//    ~UFO();
-
 private:
-//    Vec center;
     double angle;
     double bodyRadius;
     double wheelUpLength;
@@ -107,17 +93,9 @@ class Rocket : public Group {
 public:
     explicit Rocket(Vec initial = Vec(0, 0), double angle = 0, double size = 1);
 
-//    void rotate(Vec centerPoint, double angleTurning);
-
-//    void zoom();
-
     void specialMove() override;
 
-
-//    ~Rocket();
-
 private:
-//    Vec center;
     double angle;
     double bodyWidth;
     double bodyHeight;
