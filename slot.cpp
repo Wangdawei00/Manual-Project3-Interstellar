@@ -3,9 +3,11 @@
 //
 
 #include "slot.h"
+
 void slot::pushGroup(Group *car) {
-    carParking=car;
+    vehicle = car;
 }
-slot::slot(Point Center) {
-    centerOfSlot=Center;
+
+slot::slot(Point center) {
+    this->center = center;
 }

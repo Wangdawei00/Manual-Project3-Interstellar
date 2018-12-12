@@ -11,7 +11,7 @@ include_directories(${GLUT_INCLUDE_DIR})
 
 #set(CMAKE_EXE_LINKER_FLAGS "-framework OpenGL -framework GLUT")
 
-add_executable(Manual-Project3-Interstellar Figure.cpp Shape.cpp vector.cpp main.cpp)
+add_executable(Manual-Project3-Interstellar Figure.cpp Shape.cpp vector.cpp main.cpp slot.cpp)
 
 target_link_libraries(Manual-Project3-Interstellar ${GLUT_LIBRARY} ${OPENGL_LIBRARY})
 
