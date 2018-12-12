@@ -7,15 +7,16 @@
 
 #include "Shape.h"
 #include "Figure.h"
+#include <GL/freeglut.h>
 
 static const double defLength = 0.2;
 static const double defWidth = 0.1;
 
-class Slot {
+class Slot:public Group{
 public:
     void pushGroup(Group *carParking);
 
-    explicit Slot(Point Center);
+    explicit Slot(Point Center,Point datum);
 
     Group *returnVehicle();
 
@@ -23,8 +24,15 @@ public:
 
     const Point &retCoordinate() const;
 
+    const Point &retDatum() const;
+
+    void draw();
+
+    void specialMove() override;
+
 private:
     Point center;
+    Point datum;
     bool empty;
     static const double length;
     static const double width;
