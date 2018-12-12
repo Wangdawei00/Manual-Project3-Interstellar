@@ -4,10 +4,28 @@
 
 #include "slot.h"
 
-void slot::pushGroup(Group *car) {
+const double Slot::width = defWidth;
+const double Slot::length = defLength;
+
+void Slot::pushGroup(Group *car) {
     vehicle = car;
+    empty = false;
 }
 
-slot::slot(Point center) {
+Slot::Slot(Point center) {
     this->center = center;
+    vehicle = nullptr;
+    empty = true;
+}
+
+Group *Slot::returnVehicle() {
+    return vehicle;
+}
+
+bool Slot::isEmpty() const {
+    return empty;
+}
+
+const Point &Slot::retCoordinate() const {
+    return center;
 }

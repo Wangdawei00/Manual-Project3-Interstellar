@@ -8,16 +8,26 @@
 #include "Shape.h"
 #include "Figure.h"
 
-class slot {
+static const double defLength = 0.2;
+static const double defWidth = 0.1;
+
+class Slot {
 public:
     void pushGroup(Group *carParking);
 
-    explicit slot(Point Center);
+    explicit Slot(Point Center);
+
+    Group *returnVehicle();
+
+    bool isEmpty() const;
+
+    const Point &retCoordinate() const;
 
 private:
     Point center;
-    const double length = 0.2;
-    const double width = 0.1;
+    bool empty;
+    static const double length;
+    static const double width;
     Group *vehicle;
 };
 
