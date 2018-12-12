@@ -12,8 +12,9 @@ void Slot::pushGroup(Group *car) {
     empty = false;
 }
 
-Slot::Slot(Point center) {
+Slot::Slot(Point center, Point datum) {
     this->center = center;
+    this->datum = datum;
     vehicle = nullptr;
     empty = true;
 }
@@ -29,3 +30,26 @@ bool Slot::isEmpty() const {
 const Point &Slot::retCoordinate() const {
     return center;
 }
+
+
+const Point &Slot::retDatum() const {
+    return datum;
+}
+
+void Slot::draw(){
+//    Strip(center.operator+(Vec(-0.1,-0.1)),center.operator+(Vec(-0.1,0.1))).draw();
+    glBegin(GL_LINE_STRIP);
+    glVertex2d(center.operator+(Vec(-0.1,-0.1)).getX(),center.operator+(Vec(-0.1,-0.1)).getY());
+    glVertex2d(center.operator+(Vec(-0.1,0.1)).getX(),center.operator+(Vec(-0.1,0.1)).getY());
+    glEnd();
+    glBegin(GL_LINE_STRIP);
+    glVertex2d(center.operator+(Vec(0.1,-0.1)).getX(),center.operator+(Vec(0.1,-0.1)).getY());
+    glVertex2d(center.operator+(Vec(0.1,0.1)).getX(),center.operator+(Vec(0.1,0.1)).getY());
+    glEnd();
+    glBegin(GL_LINE_STRIP);
+    glVertex2d(center.operator+(Vec(-0.1,-0.1)).getX(),center.operator+(Vec(-0.1,-0.1)).getY());
+    glVertex2d(center.operator+(Vec(0.1,-0.1)).getX(),center.operator+(Vec(0.1,-0.1)).getY());
+    glEnd();
+}
+
+void Slot::specialMove() {}
