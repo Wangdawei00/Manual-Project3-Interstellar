@@ -6,27 +6,24 @@
 
 ParkingLot::ParkingLot(int column) {
     int i, j;
-    this->row=2;
+    this->row = 2;
     this->column = column;
-    Point starting_down(-0.7,-0.7);Point starting_up(-0.7,0.5);double distance=(1.4/(column-1));
-    barrierCenter=Vec(0.1,0.1);
-    vector<Slot> a,b;//generate a vector of Slot(a type defined in "slot.h")
+    Point starting_down(-0.7, -0.7);
+    Point starting_up(-0.7, 0.5);
+    double distance = (1.4 / (column - 1));
+    barrierCenter = Vec(0.1, -0.1);
+    vector<Slot> a, b;//generate a vector of Slot(a type defined in "slot.h")
     for (i = 0; i < column; ++i) {
-        Slot S(starting_down.operator+(Vec(i*distance,0)),starting_down.operator+(Vec(i*distance+0.1,0.1)));
+        Slot S(starting_down.operator+(Vec(i * distance, 0)), starting_down.operator+(Vec(i * distance + 0.1, 0.1)));
         a.push_back(S);//add new element(a new slot "S")to the end of the vector "a"
     }
     for (j = 0; j < column; ++j) {
-        Slot S(starting_up.operator+(Vec(i*distance,0)),starting_up.operator+(Vec(i*distance+0.1,0.1)));
+        Slot S(starting_up.operator+(Vec(j * distance, 0)), starting_up.operator+(Vec(j * distance + 0.1, 0.1)));
         b.push_back(S);
     }
-    slots.push_back(a);slots.push_back(b);//add "a"to the end of the whole slots
-    for (i = 0; i < row; ++i) {
-        for (j = 0; j < column; ++j) {
-            all.push_back(new Slot(slots[i][j].retCoordinate(),slots[i][j].retDatum())) ;
-        }
-    }
+    slots.push_back(a);
+    slots.push_back(b);//add "a"to the end of the whole slots
 }
-
 vector<int> const &ParkingLot::find_empty_slot() {
 //    int (*empty)[2];
     for (int i = 0; i < row; i++) {
@@ -66,12 +63,24 @@ void ParkingLot::drawingInitialize() {
 
 void ParkingLot::draw() {
     for (auto &item:all) item->draw();
+    for (int i = 0; i < row; ++i) {
+        for (int j = 0; j < column; ++j) {
+            slots[i][j].draw();
+        }
+    }
     Rect(0.5,0.5,0.5,barrierCenter,1.4,0.4,0).draw();
+    Rect(0,0,0,Vec(-1,0),0.005,2,0).draw();
+    Rect(0,0,0,Vec(0,1),2,0.005,0).draw();
+    Rect(0,0,0,Vec(1,0.1),0.005,1.8,0).draw();
+    Rect(0,0,0,Vec(0.1,-0.8),1.8,0.005,0).draw();
+    Rect(0,0,0,Vec(-0.8,-0.9),0.005,0.2,0).draw();
 }
 
 void ParkingLot::specialMove() {
     for (auto &item:all) item->specialMove();
 }
+
+
 
 vector<Slot> &ParkingLot::operator[](int a) {
     return slots[a];//return a single row "a" from "slots"

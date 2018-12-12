@@ -36,20 +36,9 @@ const Point &Slot::retDatum() const {
     return datum;
 }
 
-void Slot::draw(){
+void Slot::draw() const{
 //    Strip(center.operator+(Vec(-0.1,-0.1)),center.operator+(Vec(-0.1,0.1))).draw();
-    glBegin(GL_LINE_STRIP);
-    glVertex2d(center.operator+(Vec(-0.1,-0.1)).getX(),center.operator+(Vec(-0.1,-0.1)).getY());
-    glVertex2d(center.operator+(Vec(-0.1,0.1)).getX(),center.operator+(Vec(-0.1,0.1)).getY());
-    glEnd();
-    glBegin(GL_LINE_STRIP);
-    glVertex2d(center.operator+(Vec(0.1,-0.1)).getX(),center.operator+(Vec(0.1,-0.1)).getY());
-    glVertex2d(center.operator+(Vec(0.1,0.1)).getX(),center.operator+(Vec(0.1,0.1)).getY());
-    glEnd();
-    glBegin(GL_LINE_STRIP);
-    glVertex2d(center.operator+(Vec(-0.1,-0.1)).getX(),center.operator+(Vec(-0.1,-0.1)).getY());
-    glVertex2d(center.operator+(Vec(0.1,-0.1)).getX(),center.operator+(Vec(0.1,-0.1)).getY());
-    glEnd();
+    Rect(0,0,0,center.operator+(Vec(-0.5*width,0)),0.005,length,0).draw();
+    Rect(0,0,0,center.operator+(Vec(0.5*width,0)),0.005,length,0).draw();
+    Rect(0,0,0,center.operator+(Vec(0,-0.5*length)),width,0.005,0).draw();
 }
-
-void Slot::specialMove() {}

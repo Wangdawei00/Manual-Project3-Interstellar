@@ -157,8 +157,8 @@ Rocket::Rocket(Vec initial, double angle, double size) {
 
 void Rocket::specialMove() {
     static int i = 0;
-    const double sizeMax = 6;
-    const double sizeMin = 2;
+    const double sizeMax = 1.1;
+    const double sizeMin = 0.9;
     if (size >= sizeMin && i == 0)
         zoomIn();
     else if (size <= sizeMax) {

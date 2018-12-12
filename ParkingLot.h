@@ -24,6 +24,8 @@ public:
 
     void specialMove();
 
+//    void move();
+
     ~ParkingLot();
 
 private:
