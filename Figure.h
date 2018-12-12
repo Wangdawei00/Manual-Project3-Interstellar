@@ -93,7 +93,7 @@ public:
 //    ~UFO();
 
 private:
-    Vec center;
+//    Vec center;
     double angle;
     double bodyRadius;
     double wheelUpLength;
@@ -117,7 +117,7 @@ public:
 //    ~Rocket();
 
 private:
-    Vec center;
+//    Vec center;
     double angle;
     double bodyWidth;
     double bodyHeight;

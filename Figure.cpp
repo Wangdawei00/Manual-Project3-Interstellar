@@ -91,30 +91,30 @@ UFO::UFO(Vec initial, double angle, double size) {
     wheelDownLength = 0.03 * size;
     wheelHeight = 0.02 * size;
     antennaLength = 0.01 * size;
-    center = initial;
+    setAnchor(initial);
     this->angle = angle;
-    shapes.push_back(new SemiCircle(rand0to1(), rand0to1(), rand0to1(), center, bodyRadius, 0));
+    shapes.push_back(new SemiCircle(rand0to1(), rand0to1(), rand0to1(), getAnchor(), bodyRadius, 0));
     Vec leftWheelCenter;
-    leftWheelCenter = center + Vec(-0.02 * size, -0.01 * size);
+    leftWheelCenter = getAnchor() + Vec(-0.02 * size, -0.01 * size);
     shapes.push_back(new IsoTrapezoid(rand0to1(), rand0to1(), rand0to1(), leftWheelCenter, wheelUpLength,
                                       wheelDownLength, wheelHeight, 0));
     Vec rightWheelCenter;
-    rightWheelCenter = center + (Vec(0.02 * size, -0.01 * size));
+    rightWheelCenter = getAnchor() + (Vec(0.02 * size, -0.01 * size));
     shapes.push_back(new IsoTrapezoid(rand0to1(), rand0to1(), rand0to1(), rightWheelCenter, wheelUpLength,
                                       wheelDownLength, wheelHeight, 0));
     Vec leftAntennaCenter;
-    leftAntennaCenter = center + (Vec(cos(2.0 / 3.0 * pi) * bodyRadius, sin(2.0 / 3.0 * pi) * bodyRadius));
+    leftAntennaCenter = getAnchor() + (Vec(cos(2.0 / 3.0 * pi) * bodyRadius, sin(2.0 / 3.0 * pi) * bodyRadius));
     shapes.push_back(new Rect(rand0to1(), rand0to1(), rand0to1(), leftAntennaCenter, antennaLength, 0.005 * size,
                               2.0 / 3.0 * pi + 0));
     Vec rightAntennaCenter;
-    rightAntennaCenter = center + (Vec(cos(1.0 / 3.0 * pi) * bodyRadius, sin(1.0 / 3.0 * pi) * bodyRadius));
+    rightAntennaCenter = getAnchor() + (Vec(cos(1.0 / 3.0 * pi) * bodyRadius, sin(1.0 / 3.0 * pi) * bodyRadius));
     shapes.push_back(new Rect(rand0to1(), rand0to1(), rand0to1(), rightAntennaCenter, antennaLength, 0.005 * size,
                               1.0 / 3.0 * pi + 0));
     rotate(initial, angle);
 }
 
 void UFO::specialMove() {
-    rotate(center, 0.1);
+    rotate(getAnchor(), 0.1);
 }
 
 Rocket::Rocket(Vec initial, double angle, double size) {
@@ -127,32 +127,32 @@ Rocket::Rocket(Vec initial, double angle, double size) {
     roofHeight = 0.02 * size;
     jetUpLength = 0.04 * size / 3.00;
     this->angle = angle;
-    center = initial;
-    shapes.push_back(new Rect(rand0to1(), rand0to1(), rand0to1(), center, bodyWidth, bodyHeight, 0));
-    Vec wingP1 = center + Vec(-wingLength - 0.5 * bodyWidth, -0.5 * bodyHeight),
-            wingP2 = center + Vec(-0.5 * bodyWidth, -0.5 * bodyHeight),
-            wingP3 = center + Vec(-0.5 * bodyWidth, -0.5 * bodyHeight + wingHeight);
+    setAnchor(initial);
+    shapes.push_back(new Rect(rand0to1(), rand0to1(), rand0to1(), getAnchor(), bodyWidth, bodyHeight, 0));
+    Vec wingP1 = getAnchor() + Vec(-wingLength - 0.5 * bodyWidth, -0.5 * bodyHeight),
+            wingP2 = getAnchor() + Vec(-0.5 * bodyWidth, -0.5 * bodyHeight),
+            wingP3 = getAnchor() + Vec(-0.5 * bodyWidth, -0.5 * bodyHeight + wingHeight);
     shapes.push_back(new Triangle(wingP1, wingP2, wingP3, rand0to1(), rand0to1(), rand0to1()));
-    wingP1 = center + Vec(0.5 * bodyWidth, -0.5 * bodyHeight);
-    wingP2 = center + Vec(0.5 * bodyWidth + wingLength, -0.5 * bodyHeight);
-    wingP3 = center + Vec(0.5 * bodyWidth, -0.5 * bodyHeight + wingHeight);
+    wingP1 = getAnchor() + Vec(0.5 * bodyWidth, -0.5 * bodyHeight);
+    wingP2 = getAnchor() + Vec(0.5 * bodyWidth + wingLength, -0.5 * bodyHeight);
+    wingP3 = getAnchor() + Vec(0.5 * bodyWidth, -0.5 * bodyHeight + wingHeight);
     shapes.push_back(new Triangle(wingP1, wingP2, wingP3, rand0to1(), rand0to1(), rand0to1()));
-    Vec IsoTrapezoidCenter = center + Vec(0, -0.5 * bodyHeight - 0.5 * jetHeight);
+    Vec IsoTrapezoidCenter = getAnchor() + Vec(0, -0.5 * bodyHeight - 0.5 * jetHeight);
     shapes.push_back(new IsoTrapezoid(rand0to1(), rand0to1(), rand0to1(), IsoTrapezoidCenter, jetUpLength,
                                       bodyWidth, jetHeight,
                                       0));
-    Vec roofP1 = center + Vec(-0.5 * bodyWidth, 0.5 * bodyHeight),
-            roofP2 = center + Vec(0.5 * bodyWidth, 0.5 * bodyHeight),
-            roofP3 = center + Vec(0, 0.5 * bodyHeight + roofHeight);
+    Vec roofP1 = getAnchor() + Vec(-0.5 * bodyWidth, 0.5 * bodyHeight),
+            roofP2 = getAnchor() + Vec(0.5 * bodyWidth, 0.5 * bodyHeight),
+            roofP3 = getAnchor() + Vec(0, 0.5 * bodyHeight + roofHeight);
     shapes.push_back(new Triangle(roofP1, roofP2, roofP3, rand0to1(), rand0to1(), rand0to1()));
-    Vec RectCenter = center + Vec(0, -(1.0 / 3.0) * bodyHeight);
+    Vec RectCenter = getAnchor() + Vec(0, -(1.0 / 3.0) * bodyHeight);
     shapes.push_back(new Rect(rand0to1(), rand0to1(), rand0to1(), RectCenter, (1.0 / 3.0) * bodyWidth,
                               (1.0 / 3.0) * bodyHeight, 0));
-    RectCenter = center + Vec(0.25 * bodyWidth, 0.25 * bodyHeight);
+    RectCenter = getAnchor() + Vec(0.25 * bodyWidth, 0.25 * bodyHeight);
     shapes.push_back(new Rect(rand0to1(), rand0to1(), rand0to1(), RectCenter, 0.25 * bodyWidth, 0.25 * bodyHeight, 0));
-    RectCenter = center + Vec(-0.25 * bodyWidth, 0.25 * bodyHeight);
+    RectCenter = getAnchor() + Vec(-0.25 * bodyWidth, 0.25 * bodyHeight);
     shapes.push_back(new Rect(rand0to1(), rand0to1(), rand0to1(), RectCenter, 0.25 * bodyWidth, 0.25 * bodyHeight, 0));
-    rotate(center, angle);
+    rotate(getAnchor(), angle);
 }
 
 void Rocket::specialMove() {
@@ -172,14 +172,14 @@ void Rocket::zoomIn() {
     const double coefficient = 0.99;
     size *= coefficient;
     for (auto &item:shapes)
-        item->zoom(center, coefficient);
+        item->zoom(getAnchor(), coefficient);
 }
 
 void Rocket::zoomOut() {
     const double coefficient = 1.01;
     size *= coefficient;
     for (auto &item:shapes)
-        item->zoom(center, coefficient);
+        item->zoom(getAnchor(), coefficient);
 }
 
 void MainFigure::draw() const {

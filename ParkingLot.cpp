@@ -24,6 +24,7 @@ ParkingLot::ParkingLot(int column) {
     slots.push_back(a);
     slots.push_back(b);//add "a"to the end of the whole slots
 }
+
 vector<int> const &ParkingLot::find_empty_slot() {
 //    int (*empty)[2];
     for (int i = 0; i < row; i++) {
@@ -42,22 +43,29 @@ vector<int> const &ParkingLot::find_empty_slot() {
 }
 
 void ParkingLot::drawingInitialize() {
-    if (ParkingLot::find_empty_slot()[0]==-1) {cout<<"no empty slots!"<<endl;return;}
+    if (ParkingLot::find_empty_slot()[0] == -1) {
+        cout << "no empty slots!" << endl;
+        return;
+    }
 //    else if(){} 这里写一个判断是否有车在动的函数
     else {
-        int random=rand()%4;
-        switch (random){
-            case 0:all.push_back(new Car(Vec(-0.9,-0.9),0,1));
+        int random = rand() % 4;
+        switch (random) {
+            case 0:
+                all.push_back(new Car(Vec(-0.9, -0.9), 0, 1));
                 break;
-            case 1:all.push_back(new Teleported(Vec(-0.9,-0.9),1));
+            case 1:
+                all.push_back(new Teleported(Vec(-0.9, -0.9), 1));
                 break;
-            case 2:all.push_back(new UFO(Vec(-0.9,-0.9),0,1));
+            case 2:
+                all.push_back(new UFO(Vec(-0.9, -0.9), 0, 1));
                 break;
-            case 3:all.push_back(new Rocket(Vec(-0.9,-0.9),0,1));
+            case 3:
+                all.push_back(new Rocket(Vec(-0.9, -0.9), 0, 1));
             default:
                 break;
         }
-    slots[ParkingLot::find_empty_slot()[0]][ParkingLot::find_empty_slot()[1]].pushGroup(all.back());
+        slots[ParkingLot::find_empty_slot()[0]][ParkingLot::find_empty_slot()[1]].pushGroup(all.back());
     }
 }
 
@@ -68,18 +76,17 @@ void ParkingLot::draw() {
             slots[i][j].draw();
         }
     }
-    Rect(0.5,0.5,0.5,barrierCenter,1.4,0.4,0).draw();
-    Rect(0,0,0,Vec(-1,0),0.005,2,0).draw();
-    Rect(0,0,0,Vec(0,1),2,0.005,0).draw();
-    Rect(0,0,0,Vec(1,0.1),0.005,1.8,0).draw();
-    Rect(0,0,0,Vec(0.1,-0.8),1.8,0.005,0).draw();
-    Rect(0,0,0,Vec(-0.8,-0.9),0.005,0.2,0).draw();
+    Rect(0.5, 0.5, 0.5, barrierCenter, 1.4, 0.4, 0).draw();
+    Rect(0, 0, 0, Vec(-1, 0), 0.005, 2, 0).draw();
+    Rect(0, 0, 0, Vec(0, 1), 2, 0.005, 0).draw();
+    Rect(0, 0, 0, Vec(1, 0.1), 0.005, 1.8, 0).draw();
+    Rect(0, 0, 0, Vec(0.1, -0.8), 1.8, 0.005, 0).draw();
+    Rect(0, 0, 0, Vec(-0.8, -0.9), 0.005, 0.2, 0).draw();
 }
 
 void ParkingLot::specialMove() {
     for (auto &item:all) item->specialMove();
 }
-
 
 
 vector<Slot> &ParkingLot::operator[](int a) {
