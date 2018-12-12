@@ -14,7 +14,7 @@ class ParkingLot {
 public:
     explicit ParkingLot(int column);
 
-    vector<int> const &find_empty_slot();
+    Slot const *find_empty_slot();
 
     vector<Slot> &operator[](int a);
 
@@ -31,9 +31,11 @@ public:
 private:
     int row, column;
     vector<vector<Slot>> slots;
-    vector<Group *> all;
+    vector<Group*> all;
     Point barrierCenter;
     int index;
+    Group *movingCar;
+    bool flagMovingCar,flag1,flag2,flag3;
 };
 
 

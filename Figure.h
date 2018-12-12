@@ -8,6 +8,10 @@
 #include "vector.h"
 #include <vector>
 #include "Shape.h"
+#include "slot.h"
+
+
+using namespace std;
 
 class MainFigure : public Figure {
 public:
@@ -33,6 +37,12 @@ public:
 
     const Vec &getAnchor() const;
 
+    void setDestination(Slot* desti);
+
+    const Vec &getDestination() const;
+
+    const Slot *retSlot() const;
+
     void move(Vec v);
 
     void rotate(Point center, double angle);
@@ -46,7 +56,8 @@ protected:
     double size;
 private:
     Vec anchor;
-
+    Vec destination;
+    Slot* desti;
 };
 
 class Car : public Group {
