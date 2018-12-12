@@ -37,6 +37,8 @@ public:
 
     void rotate(Point center, double angle);
 
+    virtual void specialMove() = 0;
+
     ~Group();
 
 protected:
@@ -53,6 +55,8 @@ public:
 
     void set(double w, double h);
 
+    void specialMove() override;
+
 private:
     double width, height;
 };
@@ -63,7 +67,10 @@ public:
 
     void set(double w, double h);
 
-    void randomColor();
+//    void randomColor();
+
+    void specialMove() override;
+
 
 private:
     double width, height;
@@ -76,9 +83,12 @@ public:
 
 //    void rotate(Vec centerPoint, double angleTurning);
 
-    void spin();
+//    void spin();
 
     explicit UFO(Vec initial = Vec(0, 0), double angle = 0, double size = 1);
+
+    void specialMove() override;
+
 
 //    ~UFO();
 
@@ -99,7 +109,10 @@ public:
 
 //    void rotate(Vec centerPoint, double angleTurning);
 
-    void zoom();
+//    void zoom();
+
+    void specialMove() override;
+
 
 //    ~Rocket();
 

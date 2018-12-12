@@ -75,7 +75,7 @@ Teleported::Teleported(Vec v, double size) {
     shapes.push_back(new Rect(rand0to1(), rand0to1(), rand0to1(), v, width, height, 0));
 }
 
-void Teleported::randomColor() {
+void Teleported::specialMove() {
     shapes[0]->setColor(rand0to1(), rand0to1(), rand0to1());
 }
 
@@ -113,7 +113,7 @@ UFO::UFO(Vec initial, double angle, double size) {
     rotate(initial, angle);
 }
 
-void UFO::spin() {
+void UFO::specialMove() {
     rotate(center, 0.1);
 }
 
@@ -155,7 +155,7 @@ Rocket::Rocket(Vec initial, double angle, double size) {
     rotate(center, angle);
 }
 
-void Rocket::zoom() {
+void Rocket::specialMove() {
     static int i = 0;
     const double sizeMax = 6;
     const double sizeMin = 2;
@@ -191,3 +191,4 @@ MainFigure::MainFigure() = default;
 
 MainFigure::~MainFigure() = default;
 
+void Car::specialMove() {}
