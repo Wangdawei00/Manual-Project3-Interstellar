@@ -74,9 +74,3 @@ Vec &Vec::operator*=(double k) {
     return *this;
 }
 
-bool Vec::operator==(Vec v) {
-    if (this->x==v.x && this->y==v.y){
-        return true;
-    }
-    return false;
-}

@@ -42,3 +42,17 @@ void Slot::draw() const{
     Rect(0,0,0,center.operator+(Vec(0.5*width,0)),0.005,length,0).draw();
     Rect(0,0,0,center.operator+(Vec(0,-0.5*length)),width,0.005,0).draw();
 }
+
+void Slot::setIndex(int i,int j) {
+    this->i=i;
+    this->j=j;
+}
+
+const int Slot::getI() const {
+    return i;
+}
+
+const int Slot::getJ() const {
+    return j;
+}
+
