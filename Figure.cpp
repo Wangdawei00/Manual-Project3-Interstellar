@@ -6,8 +6,8 @@
 #include "Shape.h"
 #include <cmath>
 #include <random>
-
-
+#include <iostream>
+using namespace std;
 inline double rand0to1() {
     return rand() * 1.0 / RAND_MAX;
 }
@@ -35,7 +35,7 @@ Group::~Group() {
         delete item;
 }
 
-void Group::setDestination(const Slot *desti) {
+void Group::setDestination(const Slot* desti) {
     destination.operator=((*desti).retCoordinate());
     this->desti=desti;
 }
@@ -51,6 +51,7 @@ const Slot* Group::retSlot() const {
 
 void Group::move(Vec v) {
     anchor += v;
+    cout<<"anchor="<<anchor.getY()<<endl;
     for (auto &item:shapes) {
         item->move(v);
     }
@@ -86,7 +87,7 @@ void Car::set(double w, double h) {
 Teleported::Teleported(Vec v, double size) {
     this->size = size;
     Teleported::setAnchor(v);
-    Teleported::set(.16 * size, .08 * size);
+    Teleported::set(.08 * size, .16 * size);
     shapes.push_back(new Rect(rand0to1(), rand0to1(), rand0to1(), v, width, height, 0));
 }
 
