@@ -7,7 +7,7 @@
 
 #include "Shape.h"
 //#include "Figure.h"
-#include <GL/freeglut.h>
+#include <glut.h>
 
 class Group;
 
@@ -30,6 +30,12 @@ public:
 
     void draw() const override;
 
+    void setIndex(int i,int j);
+
+    const int getI() const;
+
+    const int getJ() const;
+
 private:
     Point center;
     Point datum;
@@ -37,6 +43,7 @@ private:
     static const double length;
     static const double width;
     Group *vehicle;
+    int i,j;
 };
 
 #endif //MANUAL_PROJECT3_INTERSTELLAR_SLOT_H
