@@ -7,6 +7,7 @@
 #include <cmath>
 #include <random>
 
+
 inline double rand0to1() {
     return rand() * 1.0 / RAND_MAX;
 }
@@ -33,6 +34,20 @@ Group::~Group() {
     for (auto &item:shapes)
         delete item;
 }
+
+void Group::setDestination(Slot* desti) {
+    destination.operator=((*desti).retCoordinate());
+    this->desti=desti;
+}
+
+const Vec& Group::getDestination() const {
+    return destination;
+}
+
+const Slot* Group::retSlot() const {
+    return desti;
+}
+
 
 void Group::move(Vec v) {
     anchor += v;

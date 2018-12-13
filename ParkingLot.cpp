@@ -4,12 +4,18 @@
 
 #include "ParkingLot.h"
 
+
 ParkingLot::ParkingLot(int column) {
     int i, j;
     this->row = 2;
     this->column = column;
-    Point starting_down(-0.7, -0.7);
-    Point starting_up(-0.7, 0.5);
+    flag1=true;
+    flag2=true;
+    flag3=true;
+    flagMovingCar=true;
+    index=0;//index is used to determine how many times the vehicle has rotated ( pi/30 = 1 time )
+    Point starting_down(-0.75, -0.7);
+    Point starting_up(-0.75, 0.5);
     double distance = (1.4 / (column - 1));
     barrierCenter = Vec(0.1, -0.1);
     vector<Slot> a, b;//generate a vector of Slot(a type defined in "slot.h")
@@ -25,47 +31,85 @@ ParkingLot::ParkingLot(int column) {
     slots.push_back(b);//add "a"to the end of the whole slots
 }
 
-vector<int> const &ParkingLot::find_empty_slot() {
+Slot const *ParkingLot::find_empty_slot() {
 //    int (*empty)[2];
     for (int i = 0; i < row; i++) {
         for (int j = 0; j < column; j++) {
             if (slots[i][j].isEmpty()) {//if there exists an empty slot
-//                return a[i][j];
-                static vector<int> ret(2, 0);//generate a vector containing 2 integers
-                ret[0] = i;
-                ret[1] = j;
-                return ret;
+                return &slots[i][j];
             }
         }
     }
-    static vector<int> b = vector<int>(2, -1);//otherwise return (-1,-1) to indicate no empty slot
-    return b;
+    return nullptr;
 }
 
 void ParkingLot::drawingInitialize() {
-    if (ParkingLot::find_empty_slot()[0] == -1) {
+    if (ParkingLot::find_empty_slot() == nullptr) {
         cout << "no empty slots!" << endl;
         return;
     }
-//    else if(){} 这里写一个判断是否有车在动的函数
+    if (flagMovingCar){
+        if (flag1){
+            Vec const dir(0,0.01); //the direction( go up )
+            (*(all.end()-1))->move(dir); //move up
+            Vec momentAnchor=(*(all.end()-1))->getAnchor();
+            Vec corner1=Vec(0.9,(*(all.end()-1))->getDestination().getY());
+            if (momentAnchor==corner1){ //if vehicle moves to the first corner
+                flag1=false;
+            }
+        }else if (flag2){ //need to turn right at the first corner
+            double const angle=pi/30; //the direction( turn right ) in order to let the vehicle stop when angle=pi/2, the unit angle must be the factor of pi/2
+            Vec corner1=(*(all.end()-1))->getDestination();
+            corner1=corner1.operator+(Vec(0.05,0));//the turning center
+            (*(all.end()-1))->rotate(corner1,angle); //rotate
+            index++;
+            if (index==15){ //if vehicle has finished rotating
+                flag2=false;
+                index=0;
+            }
+        }else if (flag3) {
+            Vec const dir(0.01,0); //the direction( go right )
+            (*(all.end()-1))->move(dir); //move right
+            Vec momentAnchor=(*(all.end()-1))->getAnchor();
+            Vec corner2=(*(all.end()-1))->getDestination();
+            corner2=corner2.operator+(Vec(0.2,0.2));
+            if (momentAnchor == corner2) { //if vehicle moves to the second corner
+                flag3=false;
+            }
+        }else {
+            double const angle=-pi / 30; //anticlockwise
+            Vec corner2=(*(all.end()-1))->getDestination();
+            corner2=corner2.operator+(Vec(0.2,0));//the turning center
+            (*(all.end()-1))->rotate(corner2,angle); //rotate
+            index++;
+            if (index == 15) { //if vehicle has finished rotating
+                flagMovingCar=false;
+                index=0;
+            }
+        }
+    }
     else {
         int random = rand() % 4;
         switch (random) {
             case 0:
                 all.push_back(new Car(Vec(-0.9, -0.9), 0, 1));
+                (*(all.end()-1))->setDestination(ParkingLot::find_empty_slot());
                 break;
             case 1:
-                all.push_back(new Teleported(Vec(-0.9, -0.9), 1));
+                all.push_back(new Teleported(Vec(ParkingLot::find_empty_slot()->retCoordinate().getX(), ParkingLot::find_empty_slot()->retCoordinate().getY()), 1));
+                slots[ParkingLot::find_empty_slot()->retCoordinate().getX()][ParkingLot::find_empty_slot()->retCoordinate().getY()].pushGroup(all.back());
+                flagMovingCar=false;
                 break;
             case 2:
                 all.push_back(new UFO(Vec(-0.9, -0.9), 0, 1));
+                (*(all.end()-1))->setDestination(ParkingLot::find_empty_slot());
                 break;
             case 3:
                 all.push_back(new Rocket(Vec(-0.9, -0.9), 0, 1));
+                (*(all.end()-1))->setDestination(ParkingLot::find_empty_slot());
             default:
                 break;
         }
-        slots[ParkingLot::find_empty_slot()[0]][ParkingLot::find_empty_slot()[1]].pushGroup(all.back());
     }
 }
 
