@@ -37,7 +37,7 @@ public:
 
     const Vec &getAnchor() const;
 
-    void setDestination(Slot* desti);
+    void setDestination(const Slot *desti);
 
     const Vec &getDestination() const;
 
@@ -49,7 +49,7 @@ public:
 
     virtual void specialMove() = 0;
 
-    ~Group();
+    virtual ~Group();
 
 protected:
     std::vector<Shape *> shapes;
@@ -57,7 +57,7 @@ protected:
 private:
     Vec anchor;
     Vec destination;
-    Slot* desti;
+    const Slot *desti;
 };
 
 class Car : public Group {

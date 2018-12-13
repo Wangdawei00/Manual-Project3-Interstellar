@@ -35,7 +35,7 @@ Group::~Group() {
         delete item;
 }
 
-void Group::setDestination(Slot* desti) {
+void Group::setDestination(const Slot *desti) {
     destination.operator=((*desti).retCoordinate());
     this->desti=desti;
 }
