@@ -3,6 +3,7 @@
 //
 
 #include "ParkingLot.h"
+#include "Figure.h"
 
 
 ParkingLot::ParkingLot(int column) {

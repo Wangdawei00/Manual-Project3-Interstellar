@@ -6,6 +6,7 @@
 #define MANUAL_PROJECT3_INTERSTELLAR_PARKINGLOT_H
 
 #include <iostream>
+#include <vector>
 #include "slot.h"
 
 using namespace std;

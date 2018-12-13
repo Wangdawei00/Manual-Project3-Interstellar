@@ -6,17 +6,19 @@
 #define MANUAL_PROJECT3_INTERSTELLAR_SLOT_H
 
 #include "Shape.h"
-#include "Figure.h"
+//#include "Figure.h"
 #include <GL/freeglut.h>
+
+class Group;
 
 static const double defLength = 0.2;
 static const double defWidth = 0.1;
 
-class Slot:public Figure{
+class Slot : public Figure {
 public:
     void pushGroup(Group *carParking);
 
-    explicit Slot(Point Center,Point datum);
+    explicit Slot(Point Center, Point datum);
 
     Group *returnVehicle();
 
