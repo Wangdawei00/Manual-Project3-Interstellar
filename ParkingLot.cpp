@@ -14,7 +14,6 @@ bool compare(double x, double y) {
 
 
 ParkingLot::ParkingLot(int column) {
-    int i, j;
     this->row = 2;
     this->column = column;
     flag1 = true;
@@ -27,11 +26,11 @@ ParkingLot::ParkingLot(int column) {
     double distance = (1.4 / (column - 1));
     barrierCenter = Vec(0.1, -0.1);
     vector<Slot> a, b;//generate a vector of Slot(a type defined in "slot.h")
-    for (i = 0; i < column; ++i) {
+    for (int i = 0; i < column; ++i) {
         Slot S(starting_down.operator+(Vec(i * distance, 0)), starting_down.operator+(Vec(i * distance + 0.1, 0.1)));
         a.push_back(S);//add new element(a new slot "S")to the end of the vector "a"
     }
-    for (j = 0; j < column; ++j) {
+    for (int j = 0; j < column; ++j) {
         Slot S(starting_up.operator+(Vec(j * distance, 0)), starting_up.operator+(Vec(j * distance + 0.1, 0.1)));
         b.push_back(S);
     }
