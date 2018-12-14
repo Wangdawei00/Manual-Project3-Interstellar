@@ -6,8 +6,9 @@
 #include "Shape.h"
 #include <cmath>
 #include <random>
-#include <iostream>
+//#include <iostream>
 using namespace std;
+
 inline double rand0to1() {
     return rand() * 1.0 / RAND_MAX;
 }
@@ -35,23 +36,22 @@ Group::~Group() {
         delete item;
 }
 
-void Group::setDestination(const Slot* desti) {
+void Group::setDestination(const Slot *desti) {
     destination.operator=((*desti).retCoordinate());
-    this->desti=desti;
+    this->desti = desti;
 }
 
-const Vec& Group::getDestination() const {
+const Vec &Group::getDestination() const {
     return destination;
 }
 
-const Slot* Group::retSlot() const {
+const Slot *Group::retSlot() const {
     return desti;
 }
 
 
 void Group::move(Vec v) {
     anchor += v;
-    cout<<"anchor="<<anchor.getY()<<endl;
     for (auto &item:shapes) {
         item->move(v);
     }
@@ -173,7 +173,7 @@ Rocket::Rocket(Vec initial, double angle, double size) {
 
 void Rocket::specialMove() {
     static int i = 0;
-    const double sizeMax = 1.1;
+    const double sizeMax = 1.3;
     const double sizeMin = 0.9;
     if (size >= sizeMin && i == 0)
         zoomIn();
