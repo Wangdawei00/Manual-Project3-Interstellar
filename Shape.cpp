@@ -38,7 +38,6 @@ void Shape::setColor(double r, double g, double b) {
     color.set(r, g, b);
 }
 
-
 Quadrilateral::Quadrilateral(double r, double g, double b, Point p1, Point p2, Point p3, Point p4) : Shape(r, g, b) {
     point1 = p1;
     point2 = p2;
@@ -131,13 +130,11 @@ void IsoTrapezoid::rotate(Point center, double angle) {
     this->center = (this->center - center << angle) + center;
 }
 
-
 void Triangle::move(Vec v) {
     point3 += v;
     point1 += v;
     point2 += v;
 }
-
 
 void Triangle::rotate(Point center, double angle) {
     point1 = (point1 - center << angle) + center;
@@ -231,16 +228,12 @@ Shape::~Shape() = default;
 
 SemiCircle::~SemiCircle() = default;
 
-//
 Quadrilateral::~Quadrilateral() = default;
 
-//
 Circle::~Circle() = default;
 
-//
 Triangle::~Triangle() = default;
 
-//
 IsoTrapezoid::~IsoTrapezoid() = default;
 
 Rect::~Rect() = default;

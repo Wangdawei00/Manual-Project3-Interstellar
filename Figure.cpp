@@ -6,17 +6,12 @@
 #include "Shape.h"
 #include <cmath>
 #include <random>
-//#include <iostream>
+
 using namespace std;
 
 inline double rand0to1() {
     return rand() * 1.0 / RAND_MAX;
 }
-
-//MainFigure &MainFigure::getInstance() {
-//    static MainFigure instance;
-//    return instance;
-//}
 
 void Group::setAnchor(Vec v) {
     anchor = v;
@@ -48,7 +43,6 @@ const Vec &Group::getDestination() const {
 const Slot *Group::retSlot() const {
     return desti;
 }
-
 
 void Group::move(Vec v) {
     anchor += v;
@@ -197,8 +191,6 @@ void Rocket::zoomOut() {
     for (auto &item:shapes)
         item->zoom(getAnchor(), coefficient);
 }
-
-
 
 void Car::specialMove() {}
 

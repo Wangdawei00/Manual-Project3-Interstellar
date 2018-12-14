@@ -31,7 +31,6 @@ void MainFigure::draw(int *argc, char **argv) {
     glutDisplayFunc(glDraw);
     glutTimerFunc(50, TimeStep, 50);
     glutMainLoop();
-
 }
 
 MainFigure::MainFigure() = default;

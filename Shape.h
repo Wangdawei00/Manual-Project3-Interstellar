@@ -12,8 +12,6 @@ static const double pi = 3.1415926535897932;
 class Figure {
 public:
     virtual void draw() const = 0;
-
-    // virtual ~Figure() = 0;
 };
 
 class Color {
@@ -67,6 +65,7 @@ public:
                            Point p3 = Vec(1, 0), Point p4 = Vec(1, 1));
 
     ~Quadrilateral() override;
+
 protected:
     Point point1, point2, point3, point4;//counterclockwise
 
@@ -83,6 +82,7 @@ public:
     void zoom(Point center, double coefficient) override;
 
     ~IsoTrapezoid() override;
+
 private:
     Point center;
     double rotationAngle;
@@ -100,6 +100,7 @@ public:
     void zoom(Point center, double coefficient) override;
 
     ~Rect() override;
+
 private:
     Point center;
     double length, width;
@@ -138,6 +139,7 @@ public:
     void zoom(Point center, double coefficient) override;
 
     ~Circle() override;
+
 private:
     Point center;
     double radius;

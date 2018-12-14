@@ -11,7 +11,6 @@ bool compare(double x, double y) {
     return ans >= -f && ans <= f;
 }
 
-
 ParkingLot::ParkingLot(int column) {
     this->row = 2;
     this->column = column;
@@ -44,7 +43,6 @@ ParkingLot::ParkingLot(int column) {
 
 
 Slot const *ParkingLot::find_empty_slot() {
-//    int (*empty)[2];
     for (int i = 0; i < 2; i++) {
         for (int j = 0; j < column; j++) {
             if (slots[i][j].isEmpty()) {//if there exists an empty slot
@@ -137,7 +135,6 @@ void ParkingLot::drawingInitialize() {
         }
     }
     specialMove();
-
 }
 
 void ParkingLot::draw() {
@@ -158,7 +155,6 @@ void ParkingLot::draw() {
 void ParkingLot::specialMove() {
     for (auto &item:all) item->specialMove();
 }
-
 
 vector<Slot> &ParkingLot::operator[](int a) {
     return slots[a];//return a single row "a" from "slots"
