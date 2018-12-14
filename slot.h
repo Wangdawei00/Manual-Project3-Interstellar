@@ -7,7 +7,7 @@
 
 #include "Shape.h"
 //#include "Figure.h"
-#include <glut.h>
+#include <GL/glut.h>
 
 class Group;
 

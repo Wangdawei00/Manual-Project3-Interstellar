@@ -32,11 +32,11 @@ public:
 private:
     int row, column;
     vector<vector<Slot>> slots;
-    vector<Group*> all;
+    vector<Group *> all;
     Point barrierCenter;
     int index;
     Group *movingCar;
-    bool flagMovingCar,flag1,flag2,flag3;
+    bool flagMovingCar, flag1, flag2, flag3;
 };
 
 

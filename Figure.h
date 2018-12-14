@@ -37,7 +37,7 @@ public:
 
     const Vec &getAnchor() const;
 
-    void setDestination(const Slot* desti);
+    void setDestination(const Slot *desti);
 
     const Vec &getDestination() const;
 

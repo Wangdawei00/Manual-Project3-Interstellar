@@ -1,6 +1,6 @@
 #include <iostream>
 #include "ParkingLot.h"
-#include <glut.h>
+#include <GL/glut.h>
 
 using namespace std;
 void glDraw() {

@@ -3,7 +3,7 @@
 //
 
 #include "Shape.h"
-#include <glut.h>
+#include <GL/glut.h>
 #include <cmath>
 
 Color::Color(double r, double g, double b) {
