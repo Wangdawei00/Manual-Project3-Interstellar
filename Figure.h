@@ -9,17 +9,26 @@
 #include <vector>
 #include "Shape.h"
 #include "slot.h"
+#include "ParkingLot.h"
 
 
 using namespace std;
 
-class MainFigure : public Figure {
+class MainFigure {
 public:
-    static MainFigure &getInstance();
+//    static MainFigure &getInstance();
 
-    void draw() const override;
+    static void draw(int *argc, char **argv);
+
+    static void initPark(int column);
 
 private:
+    static ParkingLot *parkingLot;
+
+    static void glDraw();
+
+    static void TimeStep(int n);
+
     MainFigure();
 
     ~MainFigure();

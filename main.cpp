@@ -1,31 +1,23 @@
 #include <iostream>
-#include "ParkingLot.h"
+#include "Figure.h"
 #include <GL/glut.h>
+#include <ctime>
 
 using namespace std;
 
-void glDraw() {
-    static ParkingLot park(7);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    park.drawingInitialize();
-    park.draw();
-    glutSwapBuffers();
-    glFlush();
-}
-
-void TimeStep(int n) {
-    glutTimerFunc((unsigned int) n, TimeStep, n);
-    glutPostRedisplay();
-}
-
 int main(int argc, char **argv) {
-    glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
-    glutCreateWindow("Home sweet home");
-    glClearColor(1.0, 1.0, 1.0, 0.0);
-    glClear(GL_COLOR_BUFFER_BIT);
-    glutDisplayFunc(glDraw);
-    glutTimerFunc(50, TimeStep, 50);
-    glutMainLoop();
+    srand((unsigned int) time(nullptr));
+    int column = 0;
+    for (int i = 1; i < argc; ++i) {
+        if (strcmp("--size", argv[i]) == 0) {
+            column = strtol(argv[i + 1], nullptr, 10);
+            break;
+        }
+    }
+    if (column == 0) {
+        cerr << "You didn't correctly initialize the Parking Lot!\nPlease refer to the README carefully!" << endl;
+    }
+    MainFigure::initPark(column);
+    MainFigure::draw(&argc, argv);
     return 0;
 }

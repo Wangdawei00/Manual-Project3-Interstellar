@@ -13,10 +13,10 @@ inline double rand0to1() {
     return rand() * 1.0 / RAND_MAX;
 }
 
-MainFigure &MainFigure::getInstance() {
-    static MainFigure instance;
-    return instance;
-}
+//MainFigure &MainFigure::getInstance() {
+//    static MainFigure instance;
+//    return instance;
+//}
 
 void Group::setAnchor(Vec v) {
     anchor = v;
@@ -198,13 +198,9 @@ void Rocket::zoomOut() {
         item->zoom(getAnchor(), coefficient);
 }
 
-void MainFigure::draw() const {
 
-
-}
-
-MainFigure::MainFigure() = default;
-
-MainFigure::~MainFigure() = default;
 
 void Car::specialMove() {}
+
+
+
