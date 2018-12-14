@@ -5,7 +5,7 @@
 #ifndef MANUAL_PROJECT3_INTERSTELLAR_PARKINGLOT_H
 #define MANUAL_PROJECT3_INTERSTELLAR_PARKINGLOT_H
 
-#include <iostream>
+//#include <iostream>
 #include <vector>
 #include "slot.h"
 

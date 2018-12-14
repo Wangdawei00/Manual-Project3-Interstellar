@@ -49,7 +49,7 @@ public:
 
     virtual void specialMove() = 0;
 
-    ~Group();
+    virtual ~Group();
 
 protected:
     std::vector<Shape *> shapes;

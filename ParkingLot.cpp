@@ -8,8 +8,7 @@
 bool compare(double x, double y) {
     const double f = 0.01;
     double ans = x - y;
-    if ((ans >= -f) && (ans <= f)) return true;
-    return false;
+    return ans >= -f && ans <= f;
 }
 
 
@@ -58,7 +57,6 @@ Slot const *ParkingLot::find_empty_slot() {
 
 void ParkingLot::drawingInitialize() {
     if (ParkingLot::find_empty_slot() == nullptr) {
-        cout << "no empty slots!" << endl;
         return;
     }
     if (flagMovingCar) {
@@ -75,7 +73,6 @@ void ParkingLot::drawingInitialize() {
             if (compare(momentAnchor.getY(), corner1.getY()) &&
                 compare(momentAnchor.getX(), corner1.getX())) { //if vehicle moves to the first corner
                 flag1 = false;
-                cout << "hu" << endl;
             }
         } else if (flag2) { //need to turn right at the first corner
             double const angle = -pi /
@@ -108,8 +105,6 @@ void ParkingLot::drawingInitialize() {
                 flag1 = true;
                 flag2 = true;
                 flag3 = true;
-                cout << "slot=[" << ParkingLot::find_empty_slot()->getI() << "]["
-                     << ParkingLot::find_empty_slot()->getJ() << "]" << endl;
                 slots[ParkingLot::find_empty_slot()->getI()][ParkingLot::find_empty_slot()->getJ()].pushGroup(
                         all.back());
                 index = 0;

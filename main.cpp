@@ -3,8 +3,9 @@
 #include <GL/glut.h>
 
 using namespace std;
+
 void glDraw() {
-    static ParkingLot  park(7);
+    static ParkingLot park(7);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     park.drawingInitialize();
     park.draw();
@@ -12,18 +13,19 @@ void glDraw() {
     glFlush();
 }
 
-void TimeStep(int n){
-    glutTimerFunc(n,TimeStep,n);
+void TimeStep(int n) {
+    glutTimerFunc((unsigned int) n, TimeStep, n);
     glutPostRedisplay();
 }
 
-int main() {
+int main(int argc, char **argv) {
+    glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
     glutCreateWindow("Home sweet home");
     glClearColor(1.0, 1.0, 1.0, 0.0);
     glClear(GL_COLOR_BUFFER_BIT);
     glutDisplayFunc(glDraw);
-    glutTimerFunc(25, TimeStep, 25);
+    glutTimerFunc(50, TimeStep, 50);
     glutMainLoop();
     return 0;
 }
