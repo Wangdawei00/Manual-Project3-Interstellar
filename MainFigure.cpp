@@ -3,16 +3,16 @@
 //
 #include "Figure.h"
 
-ParkingLot *MainFigure::parkingLot;
+ParkingLot MainFigure::parkingLot(0);
 
 void MainFigure::initPark(int column) {
-    parkingLot = new ParkingLot(column);
+    parkingLot = ParkingLot(column);
 }
 
 void MainFigure::glDraw() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    MainFigure::parkingLot->drawingInitialize();
-    MainFigure::parkingLot->draw();
+    MainFigure::parkingLot.drawingInitialize();
+    MainFigure::parkingLot.draw();
     glutSwapBuffers();
     glFlush();
 }

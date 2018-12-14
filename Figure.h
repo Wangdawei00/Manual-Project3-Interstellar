@@ -23,7 +23,7 @@ public:
     static void initPark(int column);
 
 private:
-    static ParkingLot *parkingLot;
+    static ParkingLot parkingLot;
 
     static void glDraw();
 
